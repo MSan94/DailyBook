@@ -1,12 +1,11 @@
 package com.prj.dailybook.view
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.prj.dailybook.contract.HomeContract
-import com.prj.dailybook.databinding.ActivityHomeBinding
-import com.prj.dailybook.presenter.HomePresenter
+import com.prj.dailybook.contract.BestSellerContract
+import com.prj.dailybook.databinding.ActivityBestsellerBinding
+import com.prj.dailybook.presenter.BestSellerPresenter
 import com.prj.dailybook.util.PropertiesData
 import com.prj.dailybook.util.adapter.BookAdapter
 import com.prj.dailybook.util.model.BestSellerDto
@@ -15,18 +14,19 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeActivity() : AppCompatActivity(), HomeContract.View {
+class BestSellerActivity() : AppCompatActivity(), BestSellerContract.View {
 
-    val binding by lazy { ActivityHomeBinding.inflate(layoutInflater) }
-    override lateinit var presenter: HomeContract.Presenter
+    private val binding by lazy { ActivityBestsellerBinding.inflate(layoutInflater) }
+    override lateinit var presenter: BestSellerContract.Presenter
 
     val adapter = BookAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        presenter = HomePresenter()
+        init()
 
+        /** presenter로 옮길 예정 **/
         val responseService = RetrofitObject.apiService.getBestSellerBooks(PropertiesData.SERVICE_KEY)
                 .enqueue(object : Callback<BestSellerDto> {
                     override fun onResponse(call: Call<BestSellerDto>, response: Response<BestSellerDto>) {
@@ -48,6 +48,8 @@ class HomeActivity() : AppCompatActivity(), HomeContract.View {
     }
 
     override fun init() {
+        presenter = BestSellerPresenter()
+        presenter.setView(this)
     }
 
     companion object{

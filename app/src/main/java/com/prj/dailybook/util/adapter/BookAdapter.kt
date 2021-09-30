@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.prj.dailybook.databinding.ItemBookBinding
 import com.prj.dailybook.util.model.Book
 
@@ -13,7 +14,15 @@ class BookAdapter : ListAdapter<Book, BookAdapter.BookItemViewHolder>(diffUtil) 
 
     inner class BookItemViewHolder(private val binding : ItemBookBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(bookModel : Book){
+            binding.textViewDescription.text = bookModel.description
             binding.textViewTitle.text = bookModel.title
+            Glide
+                .with(binding.imageViewCover.context)
+                .load(bookModel.coverSmallUrl)
+                .into(binding.imageViewCover)
+            binding.textViewAuth.text = "작가 : ${bookModel.author}"
+            binding.textViewRank.text = "랭킹 : ${bookModel.rank}"
+            binding.textViewCategory.text = bookModel.categoryName
         }
     }
 

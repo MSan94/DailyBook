@@ -1,17 +1,20 @@
 package com.prj.dailybook.contract
 
-import androidx.appcompat.widget.AppCompatButton
+import androidx.fragment.app.Fragment
 import com.prj.dailybook.BasePresenter
 import com.prj.dailybook.BaseView
 
-interface HomeContract {
+interface MainContract {
+
 
     interface View : BaseView<Presenter> {
         override fun init()
-        fun btnClickEvent(type : String)
+        fun initFragment()
+        fun replaceFragment(fragment : Fragment)
     }
 
     interface Presenter : BasePresenter {
-        fun setView(view : HomeContract.View)
+        fun setView(view : MainContract.View)
     }
+
 }
