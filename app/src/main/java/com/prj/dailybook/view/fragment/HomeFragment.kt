@@ -6,12 +6,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import com.prj.dailybook.contract.BestSellerContract
 import com.prj.dailybook.contract.HomeContract
 import com.prj.dailybook.databinding.FragmentHomeBinding
 import com.prj.dailybook.view.BestSellerActivity
+import com.prj.dailybook.view.dialog.CloseDialogFragment
 
 class HomeFragment : Fragment() , HomeContract.View {
 
@@ -40,9 +42,8 @@ class HomeFragment : Fragment() , HomeContract.View {
                 startActivity(intent)
             }
             "4" ->{
-                if(Build.VERSION.SDK_INT >= 21){
-                    android.os.Process.killProcess((android.os.Process.myPid()))
-                }
+                val dialog = CloseDialogFragment()
+                dialog.show(parentFragmentManager,"dd")
             }
         }
     }

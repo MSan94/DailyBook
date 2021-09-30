@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0F1F4"
+    android:background="@color/background_color"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,7 +44,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_BestSeller"
-            android:text="베스트셀러"
+            android:text="@string/menu1"
             android:textSize="18sp"
             android:fontFamily="@font/nanumsquareroundeb"
             android:layout_marginLeft="20dp"
@@ -60,7 +60,7 @@
         <androidx.appcompat.widget.AppCompatButton
             app:layout_constraintTop_toBottomOf="@+id/btn_BestSeller"
             android:id="@+id/btn_FindBook"
-            android:text="책 검색"
+            android:text="@string/menu2"
             android:textSize="18sp"
             android:fontFamily="@font/nanumsquareroundeb"
             android:layout_margin="20dp"
@@ -74,7 +74,7 @@
         <androidx.appcompat.widget.AppCompatButton
             app:layout_constraintTop_toBottomOf="@+id/btn_FindBook"
             android:id="@+id/btn_BookMarket"
-            android:text="서점 찾기"
+            android:text="@string/menu3"
             android:textSize="18sp"
             android:fontFamily="@font/nanumsquareroundeb"
             android:layout_margin="20dp"
@@ -89,7 +89,7 @@
         <androidx.appcompat.widget.AppCompatButton
             app:layout_constraintTop_toBottomOf="@+id/btn_BookMarket"
             android:id="@+id/btn_Close"
-            android:text="앱 종료"
+            android:text="@string/menu4"
             android:textSize="18sp"
             android:fontFamily="@font/nanumsquareroundeb"
             android:layout_margin="20dp"

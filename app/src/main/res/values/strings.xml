@@ -8,4 +8,16 @@
 
     <!-- 공통 -->
     <string name="menu">메뉴</string>
+    <string name="finder">검색어를 입력해주세요.</string>
+    <string name="btn_ok">네</string>
+    <string name="btn_no">아니오</string>
+
+    <!-- 메뉴 -->
+    <string name="menu1">베스트셀러</string>
+    <string name="menu2">책 검색</string>
+    <string name="menu3">서점 찾기</string>
+    <string name="menu4">앱 종료</string>
+
+    <!-- 컨텐츠 -->
+    <string name="bestSeller">베스트 셀러</string>
 </resources>
