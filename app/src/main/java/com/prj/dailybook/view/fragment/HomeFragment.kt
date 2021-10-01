@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment
 import com.prj.dailybook.contract.BestSellerContract
 import com.prj.dailybook.contract.HomeContract
 import com.prj.dailybook.databinding.FragmentHomeBinding
+import com.prj.dailybook.util.`interface`.DetailInterface
+import com.prj.dailybook.util.model.Book
 import com.prj.dailybook.view.BestSellerActivity
 import com.prj.dailybook.view.dialog.CloseDialogFragment
 
@@ -43,9 +45,10 @@ class HomeFragment : Fragment() , HomeContract.View {
             }
             "4" ->{
                 val dialog = CloseDialogFragment()
-                dialog.show(parentFragmentManager,"dd")
+                dialog.show(parentFragmentManager,"closeDialog")
             }
         }
     }
+
 
 }
