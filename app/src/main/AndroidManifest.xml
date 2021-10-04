@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.BestSellerActivity"/>
+        <activity android:name=".view.BookActivity"/>
     </application>
 
 </manifest>
