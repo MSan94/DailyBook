@@ -11,6 +11,7 @@
     <string name="finder">검색어를 입력해주세요.</string>
     <string name="btn_ok">네</string>
     <string name="btn_no">아니오</string>
+    <string name="search">검색</string>
 
     <!-- 메뉴 -->
     <string name="menu1">베스트셀러</string>

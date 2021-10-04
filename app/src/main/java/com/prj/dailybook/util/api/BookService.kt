@@ -14,7 +14,7 @@ interface BookService {
     ): Call<BestSellerDto>
 
 
-    @GET("/api/search.api")
+    @GET("/api/search.api?output=json")
     fun getBooksByName(
         @Query("key") apiKey : String,
         @Query("query") keyword : String

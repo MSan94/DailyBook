@@ -1,5 +1,6 @@
 package com.prj.dailybook.util.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
@@ -26,9 +27,12 @@ class BookAdapter(val detailInterface : DetailInterface) : ListAdapter<Book, Boo
                 .load(bookModel.coverSmallUrl)
                 .into(binding.imageViewCover)
             binding.textViewAuth.text = "작가 : ${bookModel.author}"
-            binding.textViewRank.text = "랭킹 : ${bookModel.rank}"
+            if(bookModel.rank == null){
+                binding.textViewRank.text = "순위정보 없음"
+            }else {
+                binding.textViewRank.text = "순위 : ${bookModel.rank}"
+            }
             binding.textViewCategory.text = bookModel.categoryName
-
             binding.constraintTop.setOnClickListener {
                 detailInterface.getModel(bookModel)
             }
