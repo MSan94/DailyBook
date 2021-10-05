@@ -19,7 +19,7 @@ import com.prj.dailybook.view.dialog.CloseDialogFragment
 
 class BookAdapter(val detailInterface : DetailInterface) : ListAdapter<Book, BookAdapter.BookItemViewHolder>(diffUtil), AdapterContract.View, AdapterContract.Model {
 
-    private lateinit var bookList : ArrayList<Book>
+    private var bookList : ArrayList<Book> = ArrayList()
 
     inner class BookItemViewHolder(private val binding : ItemBookBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(bookModel : Book){
@@ -49,8 +49,26 @@ class BookAdapter(val detailInterface : DetailInterface) : ListAdapter<Book, Boo
     }
 
     override fun onBindViewHolder(holder: BookItemViewHolder, position: Int) {
-        Log.d("TestApp2", "실행3")
         holder.bind(currentList[position])
+    }
+
+
+    override fun notifyAdapter() {
+//        this.notifyDataSetChanged()
+        Log.d("TestApp2", "실행4  ${bookList.size}")
+    }
+
+    override fun addItems(items: ArrayList<Book>) {
+        Log.d("TestApp2", "실행5")
+        clearItem()
+        this.bookList.addAll(items)
+        this.notifyDataSetChanged()
+        Log.d("TestApp2", "실행5 ${bookList.size}")
+    }
+
+    override fun clearItem() {
+        Log.d("TestApp2", "실행6")
+        bookList.clear()
     }
 
     //같은 아이템인지 판단 , 결정
@@ -65,22 +83,6 @@ class BookAdapter(val detailInterface : DetailInterface) : ListAdapter<Book, Boo
             }
 
         }
-    }
-
-    override fun notifyAdapter() {
-        this.notifyDataSetChanged()
-        Log.d("TestApp2", "실행4  ${bookList.size}")
-
-    }
-
-    override fun addItems(items: ArrayList<Book>) {
-        Log.d("TestApp2", "실행5")
-        this.bookList = items
-        Log.d("TestApp2", "실행5 ${bookList.size}")
-    }
-
-    override fun clearItem() {
-        bookList.clear()
     }
 
 

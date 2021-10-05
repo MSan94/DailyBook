@@ -1,26 +1,17 @@
 package com.prj.dailybook.presenter
 
 import android.content.Context
-import android.os.Handler
 import android.util.Log
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.prj.dailybook.contract.AdapterContract
 import com.prj.dailybook.contract.BookContract
 import com.prj.dailybook.util.PropertiesData
-import com.prj.dailybook.util.`interface`.DetailInterface
 import com.prj.dailybook.util.model.Book
 import com.prj.dailybook.util.model.BookListData
 import com.prj.dailybook.util.model.SearchBookDto
 import com.prj.dailybook.util.retrofit.RetrofitObject
-import okhttp3.internal.notify
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-/*
-private val view : BookContract.View,
-private val adapterView : AdapterContract.View,
-private val adapterModel : AdapterContract.Model,
-private val book : BookListData*/
 class BookPresenter : BookContract.Presenter {
     override lateinit var view: BookContract.View
     override lateinit var book: BookListData
@@ -40,7 +31,7 @@ class BookPresenter : BookContract.Presenter {
                     response.body()?.let {
                         Log.d("TestApp2", "${it.books.size}")
                         Log.d("TestApp2", it.books.toString())
-                        book.getBookListData(context , it.books.size, it.books[idx++], "2").let { list ->
+                        book.getBookListData(context , it.books.size, it.books, "2").let { _ ->
                             if(isClear){
                                 adapterModel.clearItem()
                             }
@@ -51,6 +42,7 @@ class BookPresenter : BookContract.Presenter {
                             binding.bookRecyclerView.adapter = adapter*/
                         }
                     }
+
                 }
                 override fun onFailure(call: Call<SearchBookDto>, t: Throwable) {
                     Log.d("TestApp2", "${t.toString()}")
