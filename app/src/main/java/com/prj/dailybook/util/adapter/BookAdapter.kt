@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.manager.SupportRequestManagerFragment
+import com.prj.dailybook.contract.AdapterContract
 import com.prj.dailybook.databinding.ItemBookBinding
 import com.prj.dailybook.util.`interface`.DetailInterface
 import com.prj.dailybook.util.model.Book
@@ -16,10 +17,13 @@ import com.prj.dailybook.view.dialog.BookDetailFragment
 import com.prj.dailybook.view.dialog.CloseDialogFragment
 
 
-class BookAdapter(val detailInterface : DetailInterface) : ListAdapter<Book, BookAdapter.BookItemViewHolder>(diffUtil) {
+class BookAdapter(val detailInterface : DetailInterface) : ListAdapter<Book, BookAdapter.BookItemViewHolder>(diffUtil), AdapterContract.View, AdapterContract.Model {
+
+    private lateinit var bookList : ArrayList<Book>
 
     inner class BookItemViewHolder(private val binding : ItemBookBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(bookModel : Book){
+            Log.d("TestApp2", "실행1")
             binding.textViewDescription.text = bookModel.description
             binding.textViewTitle.text = bookModel.title
             Glide
@@ -40,10 +44,12 @@ class BookAdapter(val detailInterface : DetailInterface) : ListAdapter<Book, Boo
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookItemViewHolder {
+        Log.d("TestApp2", "실행2")
         return BookItemViewHolder(ItemBookBinding.inflate(LayoutInflater.from(parent.context),parent, false))
     }
 
     override fun onBindViewHolder(holder: BookItemViewHolder, position: Int) {
+        Log.d("TestApp2", "실행3")
         holder.bind(currentList[position])
     }
 
@@ -60,5 +66,22 @@ class BookAdapter(val detailInterface : DetailInterface) : ListAdapter<Book, Boo
 
         }
     }
+
+    override fun notifyAdapter() {
+        this.notifyDataSetChanged()
+        Log.d("TestApp2", "실행4  ${bookList.size}")
+
+    }
+
+    override fun addItems(items: ArrayList<Book>) {
+        Log.d("TestApp2", "실행5")
+        this.bookList = items
+        Log.d("TestApp2", "실행5 ${bookList.size}")
+    }
+
+    override fun clearItem() {
+        bookList.clear()
+    }
+
 
 }

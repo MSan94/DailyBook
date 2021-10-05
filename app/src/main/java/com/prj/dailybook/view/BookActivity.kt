@@ -16,6 +16,7 @@ import com.prj.dailybook.util.`interface`.DetailInterface
 import com.prj.dailybook.util.adapter.BookAdapter
 import com.prj.dailybook.util.model.BestSellerDto
 import com.prj.dailybook.util.model.Book
+import com.prj.dailybook.util.model.BookListData
 import com.prj.dailybook.util.model.SearchBookDto
 import com.prj.dailybook.util.retrofit.RetrofitObject
 import com.prj.dailybook.view.dialog.BookDetailFragment
@@ -33,18 +34,20 @@ class BookActivity : AppCompatActivity(), BookContract.View, DetailInterface {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         init()
-        recyclerInit()
     }
 
     override fun init() {
-        /** 뒤로가기 안먹힘 **/
-//        binding.editTextSearch.setOnKeyListener { v, keyCode, event ->
-//            if(keyCode == KeyEvent.KEYCODE_ENTER ){
-//                search(binding.editTextSearch.text.toString())
-//                return@setOnKeyListener true
-//            }
-//            return@setOnKeyListener true
-//        }
+
+        adapter = BookAdapter(this)
+        binding.bookRecyclerView.layoutManager = LinearLayoutManager(this)
+        binding.bookRecyclerView.adapter = adapter
+        presenter = BookPresenter().apply {
+            view = this@BookActivity
+            adapterView = adapter
+            adapterModel = adapter
+            book = BookListData
+        }
+
         binding.btnSearch.setOnClickListener {
             if(binding.editTextSearch.text.isEmpty()){
                 Toast.makeText(this,"검색어를 입력해주세요.", Toast.LENGTH_SHORT).show()
@@ -52,9 +55,6 @@ class BookActivity : AppCompatActivity(), BookContract.View, DetailInterface {
             }
             search(binding.editTextSearch.text.toString())
         }
-
-        presenter = BookPresenter()
-        presenter.setView(this)
     }
 
     override fun showProgress() {
@@ -66,32 +66,10 @@ class BookActivity : AppCompatActivity(), BookContract.View, DetailInterface {
     }
 
     override fun search(search: String) {
-        /** presenter로 옮길 예정 **/
-        val responseService = RetrofitObject.apiService.getBooksByName(PropertiesData.SERVICE_KEY,search)
-            .enqueue(object : Callback<SearchBookDto> {
-                override fun onResponse(call: Call<SearchBookDto>, response: Response<SearchBookDto>) {
-                    if(response.isSuccessful.not()){
-                        Log.d("TestApp", "에러1")
-                        return
-                    }
-                    response.body()?.let {
-                        Log.d("TestApp", it.books.toString())
-                        adapter.submitList(it.books)
-                    }
-
-                }
-                override fun onFailure(call: Call<SearchBookDto>, t: Throwable) {
-
-                    Log.d("TestApp", "${t.toString()}")
-                }
-            })
-        recyclerInit()
+        presenter.getBookList(search,this,false)
     }
 
     override fun recyclerInit() {
-        adapter = BookAdapter(this)
-        binding.bookRecyclerView.layoutManager = LinearLayoutManager(this)
-        binding.bookRecyclerView.adapter = adapter
     }
 
     override fun getModel(model: Book) {
