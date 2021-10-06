@@ -21,4 +21,6 @@
 
     <!-- 컨텐츠 -->
     <string name="bestSeller">오늘의 베스트 셀러</string>
+    <string name="buy">구매링크</string>
+    <string name="jjim">책 저장</string>
 </resources>

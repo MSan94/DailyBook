@@ -23,26 +23,33 @@ class BookAdapter(val detailInterface : DetailInterface) : ListAdapter<Book, Boo
 
     inner class BookItemViewHolder(private val binding : ItemBookBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(bookModel : Book){
-            binding.textViewDescription.text = bookModel.description
             binding.textViewTitle.text = bookModel.title
+            if(bookModel.priceSales != null && !bookModel.discountRate.equals("0")){
+                binding.textViewPrice.text = "${bookModel.priceSales}원"
+                binding.textViewDiscountRate.text = "${bookModel.discountRate}% 할인"
+            }else{
+                binding.textViewPrice.text = "${bookModel.priceStandard}원"
+                binding.textViewDiscountRate.text = ""
+            }
             Glide
                 .with(binding.imageViewCover.context)
                 .load(bookModel.coverSmallUrl)
                 .into(binding.imageViewCover)
-            binding.textViewAuth.text = "작가 : ${bookModel.author}"
+            binding.textViewAuth.text = bookModel.author
+            binding.textViewPublisher.text = bookModel.publisher
             if(bookModel.rank == null){
-                binding.textViewRank.text = "순위정보 없음"
+                binding.textViewTmp.text = "평점 : ${bookModel.customerReviewRank.toString()}"
             }else {
-                binding.textViewRank.text = "순위 : ${bookModel.rank}"
+                binding.textViewTmp.text = "순위 : ${bookModel.rank}"
             }
-            binding.textViewCategory.text = bookModel.categoryName
-            binding.textViewPrice.text = "${bookModel.priceSales}원"
-
             binding.constraintTop.setOnClickListener {
                 detailInterface.getModel(bookModel)
             }
-            binding.imageViewJjim.setOnClickListener { 
-                Log.d("Test", "찜 클릭")
+            binding.textViewBuy.setOnClickListener {
+                detailInterface.goBuy(bookModel.additionalLink.toString())
+            }
+            binding.textViewJjim.setOnClickListener {
+                detailInterface.goStore(bookModel)
             }
         }
     }

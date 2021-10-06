@@ -5,4 +5,6 @@ import java.text.FieldPosition
 
 interface DetailInterface {
     fun getModel(model : Book)
+    fun goBuy(url : String)
+    fun goStore(model : Book)
 }

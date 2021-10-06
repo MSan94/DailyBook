@@ -1,5 +1,7 @@
 package com.prj.dailybook.view
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -64,6 +66,15 @@ class BookActivity : AppCompatActivity(), BookContract.View, DetailInterface {
     override fun getModel(model: Book) {
         val dialog = BookDetailFragment(model)
         dialog.show(supportFragmentManager, "detailDialog")
+    }
+
+    override fun goBuy(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
+    }
+
+    override fun goStore(model: Book) {
+        Toast.makeText(this,"찜",Toast.LENGTH_SHORT).show()
     }
 
 }

@@ -15,7 +15,7 @@
         <ImageView
             android:id="@+id/imageView_Cover"
             android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_height="120dp"
             android:background="@drawable/book_item_custom"
             android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -25,38 +25,78 @@
         <TextView
             android:id="@+id/textView_Title"
             android:layout_width="0dp"
-            android:layout_height="20dp"
+            android:layout_height="60dp"
             android:layout_marginStart="10dp"
             android:ellipsize="end"
             android:fontFamily="@font/nanumsquareroundeb"
-            android:lines="1"
-            android:textColor="@color/black"
+            android:lines="3"
+            android:textColor="@color/font_color_a"
             android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/imageView_Jjim"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView_Cover"
             app:layout_constraintTop_toTopOf="parent" />
-        <ImageView
-            android:background="@drawable/star"
-            android:id="@+id/imageView_Jjim"
-            app:layout_constraintStart_toEndOf="@+id/textView_Title"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="20dp"
-            android:layout_height="20dp"/>
+
         <TextView
-            android:id="@+id/textView_description"
+            android:id="@+id/textView_auth"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="3dp"
             android:ellipsize="end"
             android:fontFamily="@font/nanumsquareroundeb"
-            android:lines="3"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:lines="1"
+            app:layout_constraintStart_toEndOf="@+id/imageView_Cover"
+            app:layout_constraintTop_toBottomOf="@+id/textView_Title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView_Title"
-            app:layout_constraintTop_toBottomOf="@+id/textView_Title" />
+            android:textColor="@color/font_color_b"
+            android:textSize="12dp"/>
+
+        <TextView
+            android:id="@+id/textView_publisher"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/nanumsquareroundeb"
+            android:lines="1"
+            android:textColor="@color/font_color_b"
+            android:textSize="12sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="3dp"
+            app:layout_constraintStart_toEndOf="@+id/imageView_Cover"
+            app:layout_constraintTop_toBottomOf="@+id/textView_auth"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
+                app:layout_constraintStart_toEndOf="@+id/imageView_Cover"
+                app:layout_constraintTop_toBottomOf="@+id/textView_publisher"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="0dp">
+                <TextView
+                    android:id="@+id/textView_price"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:lines="1"
+                    android:textColor="@color/font_color_b"
+                    android:textSize="12sp"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"/>
+                <TextView
+                    android:id="@+id/textView_discountRate"
+                    app:layout_constraintStart_toEndOf="@+id/textView_price"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:lines="1"
+                    android:textColor="@color/font_color_b"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -71,71 +111,53 @@
         app:layout_constraintTop_toBottomOf="@+id/constraint_top">
 
         <TextView
-            android:id="@+id/textView_Rank"
+            android:id="@+id/textView_tmp"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:fontFamily="@font/nanumsquareroundeb"
-            android:gravity="center"
             android:lines="1"
-            android:textColor="@color/black"
-            android:textSize="12sp"
+            android:gravity="center"
+            android:textColor="@color/font_color_c"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView_auth"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:ellipsize="end"
-            android:fontFamily="@font/nanumsquareroundeb"
+            android:id="@+id/textView_Jjim"
+            android:text="@string/jjim"
             android:gravity="center"
-            android:lines="1"
-            android:textColor="@color/black"
-            android:textSize="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView_Rank"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView_category"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:fontFamily="@font/nanumsquareroundeb"
-            android:gravity="center"
-            android:lines="1"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView_price"
-            app:layout_constraintStart_toEndOf="@+id/textView_auth"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView_price"
-            android:ellipsize="end"
-            android:fontFamily="@font/nanumsquareroundeb"
-            android:gravity="center"
-            android:lines="1"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/textView_category"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/font_color_a"
+            app:layout_constraintStart_toEndOf="@+id/textView_tmp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView_Buy"
+            android:background="@color/background_A"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/textView_Buy"
+            android:text="@string/buy"
+            android:gravity="center"
+            android:background="@color/background_B"
+            android:textColor="@color/font_color_a"
+            app:layout_constraintStart_toEndOf="@+id/textView_Jjim"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     <TextView
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="3dp"
-        android:background="@color/black"
+        android:layout_marginTop="3dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraint_bottom"
         android:layout_width="match_parent"
+        android:background="@color/black"
         android:layout_height="1dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
