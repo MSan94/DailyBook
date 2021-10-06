@@ -36,6 +36,8 @@ class BookAdapter(val detailInterface : DetailInterface) : ListAdapter<Book, Boo
                 binding.textViewRank.text = "순위 : ${bookModel.rank}"
             }
             binding.textViewCategory.text = bookModel.categoryName
+            binding.textViewPrice.text = "${bookModel.priceSales}원"
+
             binding.constraintTop.setOnClickListener {
                 detailInterface.getModel(bookModel)
             }

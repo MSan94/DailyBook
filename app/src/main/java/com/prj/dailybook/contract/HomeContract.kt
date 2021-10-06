@@ -1,8 +1,10 @@
 package com.prj.dailybook.contract
 
+import android.content.Context
 import androidx.appcompat.widget.AppCompatButton
 import com.prj.dailybook.BasePresenter
 import com.prj.dailybook.BaseView
+import com.prj.dailybook.util.model.BookListData
 
 interface HomeContract {
 
@@ -11,6 +13,10 @@ interface HomeContract {
     }
 
     interface Presenter : BasePresenter {
-        fun setView(view : HomeContract.View)
+        var view : HomeContract.View
+        var book : BookListData
+        var adapterModel : AdapterPagerContract.Model
+        var adapterView : AdapterPagerContract.View
+        fun getData(context: Context, isClear: Boolean)
     }
 }

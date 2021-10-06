@@ -29,12 +29,12 @@ class BookDetailFragment(model : Book) : DialogFragment() {
         Log.d("ModelTest",model.toString())
         Glide
             .with(binding.imageViewCover.context)
-            .load(model.coverSmallUrl)
+            .load(model.coverLargeUrl)
             .into(binding.imageViewCover)
         binding.textViewAuth.text = "작가 : ${model.author}"
-        binding.textViewCategory.text = model.categoryName
+        binding.textViewCategory.text = "카테고리 : ${model.categoryName}"
         binding.textViewDescription.text = model.description
-        binding.textViewTitle.text = model.title
+        binding.textViewTitle.text = "제목 : ${model.title}"
 
         return binding.root
     }

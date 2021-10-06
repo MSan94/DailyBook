@@ -10,5 +10,7 @@ data class Book(
     @SerializedName("categoryId") val categoryId: String?,
     @SerializedName("categoryName") val categoryName: String?,
     @SerializedName("author") val author: String?,
-    @SerializedName("rank") val rank: String?
+    @SerializedName("rank") val rank: String?,
+    @SerializedName("priceSales") val priceSales: String?,
+    @SerializedName("coverLargeUrl") val coverLargeUrl: String?
 )

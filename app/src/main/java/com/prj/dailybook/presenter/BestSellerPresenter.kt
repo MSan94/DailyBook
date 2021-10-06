@@ -23,7 +23,6 @@ class BestSellerPresenter : BestSellerContract.Presenter {
     override lateinit var adapterView: AdapterContract.View
 
     override fun getBestSeller(context: Context, isClear: Boolean) {
-        /** presenter로 옮길 예정 **/
         val responseService = RetrofitObject.apiService.getBestSellerBooks(PropertiesData.SERVICE_KEY)
             .enqueue(object : Callback<BestSellerDto> {
                 override fun onResponse(call: Call<BestSellerDto>, response: Response<BestSellerDto>) {
