@@ -54,6 +54,10 @@ class MainActivity : AppCompatActivity(), MainContract.View , NavigationView.OnN
         binding.mainLayout.setOnClickListener {
             binding.barNavigationView.visibility = GONE
         }
+        binding.btnMenuClose.setOnClickListener {
+            binding.barNavigationView.visibility = GONE
+        }
+
 
         init()
         initFragment()
@@ -112,9 +116,6 @@ class MainActivity : AppCompatActivity(), MainContract.View , NavigationView.OnN
             R.id.menu_item2 -> {
                 val intent = Intent(this, BookActivity::class.java)
                 startActivity(intent)
-            }
-            R.id.menu_Close -> {
-                binding.barNavigationView.visibility = GONE
             }
             R.id.menu_item4 -> {
                 val dialog = CloseDialogFragment()
