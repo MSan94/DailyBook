@@ -20,5 +20,5 @@ interface BookService {
         @Query("query") keyword : String
     ): Call<SearchBookDto>
 
-
+    //http://book.interpark.com/api/recommend.api?key=6A2CE5BEFA0147424241527B53878E9EE626E2AACC55BBA05E22E894DAD40C63&categoryId=100&output=json
 }

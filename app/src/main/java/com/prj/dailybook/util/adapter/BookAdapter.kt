@@ -23,7 +23,6 @@ class BookAdapter(val detailInterface : DetailInterface) : ListAdapter<Book, Boo
 
     inner class BookItemViewHolder(private val binding : ItemBookBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(bookModel : Book){
-            Log.d("TestAppAdapter", "호출5")
             binding.textViewDescription.text = bookModel.description
             binding.textViewTitle.text = bookModel.title
             Glide
@@ -47,7 +46,6 @@ class BookAdapter(val detailInterface : DetailInterface) : ListAdapter<Book, Boo
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookItemViewHolder {
-        Log.d("TestAppAdapter", "호출3")
         return BookItemViewHolder(ItemBookBinding.inflate(LayoutInflater.from(parent.context),parent, false))
     }
 
@@ -56,27 +54,22 @@ class BookAdapter(val detailInterface : DetailInterface) : ListAdapter<Book, Boo
     }
 
     override fun onBindViewHolder(holder: BookItemViewHolder, position: Int) {
-        Log.d("TestAppAdapter", "호출4")
         holder.bind(bookList[position])
     }
 
 
     override fun notifyAdapter() {
         notifyDataSetChanged()
-        Log.d("TestAppAdapter", "호출2")
     }
 
     override fun addItems(items: ArrayList<Book>) {
-//        this.bookList.addAll(items)
         bookList.clear()
         bookList = items
         notifyDataSetChanged()
-        Log.d("TestAppAdapter", "호출1")
     }
 
     override fun clearItem() {
         bookList.clear()
-        Log.d("TestAppAdapter", "호출0")
     }
 
     //같은 아이템인지 판단 , 결정

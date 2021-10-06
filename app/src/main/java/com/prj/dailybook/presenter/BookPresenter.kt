@@ -25,7 +25,7 @@ class BookPresenter : BookContract.Presenter {
             .enqueue(object : Callback<SearchBookDto> {
                 override fun onResponse(call: Call<SearchBookDto>, response: Response<SearchBookDto>) {
                     if(response.isSuccessful.not()){
-                        Log.d("TestApp2", "에러1")
+                        Log.d(Error_TAG, "response_Nod_Success")
                         return
                     }
                     response.body()?.let {
@@ -34,17 +34,18 @@ class BookPresenter : BookContract.Presenter {
                                 adapterModel.clearItem()
                             }
                             adapterModel.addItems(it.books as ArrayList<Book>)
-//                            adapterView.notifyAdapter()
                         }
                     }
 
                 }
                 override fun onFailure(call: Call<SearchBookDto>, t: Throwable) {
-                    Log.d("TestApp2", "${t.toString()}")
+                    Log.d(Error_TAG, "${t.toString()}")
                 }
             })
 
     }
 
-
+    companion object{
+        private const val Error_TAG = "Error"
+    }
 }
