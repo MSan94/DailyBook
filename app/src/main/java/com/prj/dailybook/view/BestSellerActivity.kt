@@ -38,6 +38,7 @@ class BestSellerActivity() : AppCompatActivity(), BestSellerContract.View, Detai
     override fun init() {
         binding.bookRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.bookRecyclerView.adapter = adapter
+        binding.bookRecyclerView.scrollToPosition(0)
 
         presenter = BestSellerPresenter().apply {
             view = this@BestSellerActivity

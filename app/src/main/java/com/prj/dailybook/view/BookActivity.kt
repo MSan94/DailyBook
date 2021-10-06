@@ -58,6 +58,7 @@ class BookActivity : AppCompatActivity(), BookContract.View, DetailInterface {
 
     override fun search(search: String) {
         presenter.getBookList(search, this, false)
+        binding.bookRecyclerView.smoothScrollToPosition(0)
     }
 
     override fun recyclerInit() {
@@ -76,5 +77,6 @@ class BookActivity : AppCompatActivity(), BookContract.View, DetailInterface {
     override fun goStore(model: Book) {
         Toast.makeText(this,"찜",Toast.LENGTH_SHORT).show()
     }
+
 
 }
