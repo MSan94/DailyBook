@@ -30,33 +30,9 @@ class HomeFragment : Fragment() , HomeContract.View {
     }
 
     override fun init() {
-        binding.btnBestSeller.setOnClickListener {
-            btnClickEvent("1")
-        }
-        binding.btnFindBook.setOnClickListener {
-            btnClickEvent("2")
-        }
-        binding.btnClose.setOnClickListener {
-            btnClickEvent("4")
-        }
+
     }
 
-    override fun btnClickEvent(type : String) {
-        when(type){
-            "1" -> {
-                val intent = Intent(activity,BestSellerActivity::class.java)
-                startActivity(intent)
-            }
-            "2" -> {
-                val intent = Intent(activity, BookActivity::class.java)
-                startActivity(intent)
-            }
-            "4" ->{
-                val dialog = CloseDialogFragment()
-                dialog.show(parentFragmentManager,"closeDialog")
-            }
-        }
-    }
 
 
 }

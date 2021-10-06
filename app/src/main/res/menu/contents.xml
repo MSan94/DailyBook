@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_item1"
+        android:title="@string/menu1" />
+    <item
+        android:id="@+id/menu_item2"
+        android:title="@string/menu2" />
+    <item
+        android:id="@+id/menu_item3"
+        android:title="@string/menu3" />
+    <item
+        android:id="@+id/menu_Close"
+        android:title="메뉴닫기" />
+    <item
+        android:id="@+id/menu_item4"
+        android:title="@string/menu4" />
+</menu>

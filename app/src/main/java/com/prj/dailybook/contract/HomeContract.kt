@@ -8,7 +8,6 @@ interface HomeContract {
 
     interface View : BaseView<Presenter> {
         override fun init()
-        fun btnClickEvent(type : String)
     }
 
     interface Presenter : BasePresenter {
