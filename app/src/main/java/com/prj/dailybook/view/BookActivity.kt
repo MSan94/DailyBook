@@ -7,6 +7,7 @@ import android.view.MotionEvent
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.paginate.Paginate
 import com.prj.dailybook.contract.BestSellerContract
 import com.prj.dailybook.contract.BookContract
 import com.prj.dailybook.databinding.ActivityBookBinding
@@ -29,6 +30,8 @@ class BookActivity : AppCompatActivity(), BookContract.View, DetailInterface {
     override lateinit var presenter: BookContract.Presenter
     val binding by lazy { ActivityBookBinding.inflate(layoutInflater) }
     lateinit var adapter: BookAdapter
+
+    var parentCommentPageNum : Int? = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +56,7 @@ class BookActivity : AppCompatActivity(), BookContract.View, DetailInterface {
             }
             search(binding.editTextSearch.text.toString())
         }
+
     }
 
     override fun showProgress() {
