@@ -1,131 +1,222 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:padding="20dp"
         android:id="@+id/constraint_top"
-        app:layout_constraintDimensionRatio="1:1:1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/constraint_mid"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="0dp"
+        android:padding="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraint_mid"
+        app:layout_constraintDimensionRatio="1:1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView_Top_Title"
-            android:text="─────── 데일리북 추천 ───────"
-            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/nanumsquareroundeb"
             android:gravity="center"
+            android:text="──── 베스트셀러 TOP5 ────"
+            android:textColor="@color/black"
             android:textSize="18dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager_Book"
-            android:layout_marginTop="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_Top_Title"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:clipToPadding="false"
-            android:clipChildren="false"
             android:layout_width="match_parent"
-            android:layout_height="0dp"/>
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_Top_Title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:padding="20dp"
         android:id="@+id/constraint_mid"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraint_top"
-        app:layout_constraintBottom_toTopOf="@+id/constraint_bottom"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="0dp"
+        android:padding="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraint_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraint_top">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_left"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/constraint_right"
-            android:layout_width="0dp"
-            android:layout_height="match_parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
 
             <TextView
                 android:id="@+id/textView_Mid_Left_Title"
-                android:text="─── 딱! 한권 추천 ───"
-                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/nanumsquareroundeb"
                 android:gravity="center"
+                android:text="─── 올해는 건강하게 ───"
+                android:textColor="@color/black"
                 android:textSize="12dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView_Mid_Left_Cover"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_Mid_Left_Title"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="0dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_right"
-            app:layout_constraintStart_toEndOf="@+id/constraint_left"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="0dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/constraint_left"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/textView_Mid_Right_Title"
-                android:text="─── 국내 1위 책! ───"
-                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/nanumsquareroundeb"
                 android:gravity="center"
+                android:text="─── 외국 도서 1위  ───"
+                android:textColor="@color/black"
                 android:textSize="12dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/imageView_Mid_Right_Cover"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_Mid_Right_Title"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="0dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:padding="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraint_mid"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/constraint_bottom"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="0dp"
+        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraint_mid">
 
 
         <TextView
             android:id="@+id/textView_Bottom_Title"
-            android:text="─── 음반 추천 ───"
-            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/nanumsquareroundeb"
             android:gravity="center"
+            android:text="─── 음반 추천 ───"
+            android:textColor="@color/black"
             android:textSize="12dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_bottom_left"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/constraint_bottom_right"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_Bottom_Title">
+
+            <ImageView
+                android:id="@+id/imageView_bottom_left"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                app:layout_constraintBottom_toTopOf="@+id/textView_bottom_left"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_bottom_left"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:fontFamily="@font/nanumsquareroundeb"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:lines="1"
+                android:ellipsize="end"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView_bottom_left" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_bottom_right"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/constraint_bottom_left"
+            app:layout_constraintTop_toBottomOf="@+id/textView_Bottom_Title">
+
+
+            <ImageView
+                android:id="@+id/imageView_bottom_right"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                app:layout_constraintBottom_toTopOf="@+id/textView_bottom_right"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_bottom_right"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:fontFamily="@font/nanumsquareroundeb"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:lines="1"
+                android:ellipsize="end"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView_bottom_right" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

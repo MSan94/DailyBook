@@ -1,9 +1,15 @@
 package com.prj.dailybook.view.fragment
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
+import android.text.style.RelativeSizeSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +17,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
 import com.prj.dailybook.contract.BestSellerContract
 import com.prj.dailybook.contract.HomeContract
 import com.prj.dailybook.databinding.FragmentHomeBinding
@@ -21,6 +28,7 @@ import com.prj.dailybook.util.adapter.BookAdapter
 import com.prj.dailybook.util.adapter.ViewPagerAdapter
 import com.prj.dailybook.util.model.Book
 import com.prj.dailybook.util.model.BookListData
+import com.prj.dailybook.util.model.Music
 import com.prj.dailybook.view.BestSellerActivity
 import com.prj.dailybook.view.BookActivity
 import com.prj.dailybook.view.dialog.CloseDialogFragment
@@ -72,11 +80,11 @@ class HomeFragment : Fragment() , HomeContract.View {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         init()
+        textReSize()
         return binding.root
     }
 
     override fun init() {
-
         binding.viewPagerBook.adapter = adapter
         binding.viewPagerBook.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         binding.viewPagerBook.setPageTransformer(ZoomOutPageTransformer())
@@ -88,6 +96,56 @@ class HomeFragment : Fragment() , HomeContract.View {
         }
 
         context?.let { presenter.getData(it,false) }
+        presenter.getMusic()
+        presenter.getForeBook()
+        presenter.getHealthBook()
+
+    }
+
+    override fun setMusic(musicList: List<Music>) {
+        if(musicList.size > 1){
+            for(i in 0..1){
+                Log.d("TextTestTitle",musicList[i].title.toString())
+                if(i == 0){
+                    Glide
+                        .with(binding.imageViewBottomLeft.context)
+                        .load(musicList[i].coverLargeUrl)
+                        .into(binding.imageViewBottomLeft)
+                    binding.textViewBottomLeft.text = musicList[i].title
+                }else{
+                    Glide
+                        .with(binding.imageViewBottomRight.context)
+                        .load(musicList[i].coverLargeUrl)
+                        .into(binding.imageViewBottomRight)
+                    binding.textViewBottomRight.text = musicList[i].title
+                }
+            }
+        }
+    }
+
+    override fun setForeBook(foreBook: Book) {
+        Glide
+            .with(binding.imageViewMidRightCover.context)
+            .load(foreBook.coverLargeUrl)
+            .into(binding.imageViewMidRightCover)
+    }
+
+    override fun setHealthBook(healthBook: Book) {
+        Glide
+            .with(binding.imageViewMidLeftCover.context)
+            .load(healthBook.coverLargeUrl)
+            .into(binding.imageViewMidLeftCover)
+    }
+
+    override fun textReSize() {
+        val content = binding.textViewTopTitle.text.toString()
+        val sb : SpannableString = SpannableString(content)
+        val word = "TOP5"
+        val start = content.indexOf(word)
+        val end = start + word.length
+        sb.setSpan(ForegroundColorSpan(Color.parseColor("#C2185B")), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        sb.setSpan(RelativeSizeSpan(1.3f),start,end,SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
+        binding.textViewTopTitle.text = sb
     }
 
 

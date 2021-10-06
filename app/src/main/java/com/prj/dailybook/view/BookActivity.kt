@@ -1,29 +1,17 @@
 package com.prj.dailybook.view
 
 import android.os.Bundle
-import android.util.Log
-import android.view.KeyEvent
-import android.view.MotionEvent
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.paginate.Paginate
-import com.prj.dailybook.contract.BestSellerContract
 import com.prj.dailybook.contract.BookContract
 import com.prj.dailybook.databinding.ActivityBookBinding
 import com.prj.dailybook.presenter.BookPresenter
-import com.prj.dailybook.util.PropertiesData
 import com.prj.dailybook.util.`interface`.DetailInterface
 import com.prj.dailybook.util.adapter.BookAdapter
-import com.prj.dailybook.util.model.BestSellerDto
 import com.prj.dailybook.util.model.Book
 import com.prj.dailybook.util.model.BookListData
-import com.prj.dailybook.util.model.SearchBookDto
-import com.prj.dailybook.util.retrofit.RetrofitObject
 import com.prj.dailybook.view.dialog.BookDetailFragment
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class BookActivity : AppCompatActivity(), BookContract.View, DetailInterface {
 
