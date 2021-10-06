@@ -52,6 +52,7 @@
             android:ellipsize="end"
             android:fontFamily="@font/nanumsquareroundeb"
             android:lines="3"
+            android:textColor="@color/black"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

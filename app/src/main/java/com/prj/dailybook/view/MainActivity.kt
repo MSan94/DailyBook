@@ -40,12 +40,13 @@ class MainActivity : AppCompatActivity(), MainContract.View , NavigationView.OnN
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를꺼낼 홈버튼 활성화
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_dehaze_24) // 햄버거
-        supportActionBar?.setDisplayShowTitleEnabled(false) //툴바에 타이틀 안보이게
+//        supportActionBar?.setDisplayShowTitleEnabled(false) //툴바에 타이틀 안보이게
 
 
         barNavigationView = binding.barNavigationView

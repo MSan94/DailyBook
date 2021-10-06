@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
@@ -32,6 +33,9 @@
             android:lines="1"
             android:inputType="text"
             android:hint="@string/finder"
+            android:textColorHint="@color/black"
+            android:textColorHighlight="@color/black"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_search"
             app:layout_constraintTop_toTopOf="parent"
@@ -43,6 +47,7 @@
             android:text="@string/search"
             app:layout_constraintStart_toEndOf="@+id/editText_search"
             app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/black"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="100dp"

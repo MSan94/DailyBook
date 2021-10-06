@@ -21,6 +21,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/header"
+        android:visibility="gone"
         app:menu="@menu/contents"
         tools:ignore="MissingConstraints" >
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -59,7 +60,7 @@
         android:layout_height="wrap_content"
         app:itemIconTint="@drawable/selector_menu_color"
         app:itemRippleColor="@null"
-        app:itemTextColor="@color/black"
+        app:itemTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
