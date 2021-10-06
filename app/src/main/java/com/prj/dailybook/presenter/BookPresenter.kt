@@ -29,17 +29,12 @@ class BookPresenter : BookContract.Presenter {
                         return
                     }
                     response.body()?.let {
-                        Log.d("TestApp2", "${it.books.size}")
-                        Log.d("TestApp2", it.books.toString())
                         book.getBookListData(context , it.books.size, it.books, "2").let { _ ->
                             if(isClear){
                                 adapterModel.clearItem()
                             }
                             adapterModel.addItems(it.books as ArrayList<Book>)
-                            adapterView.notifyAdapter()
-/*
-                            binding.bookRecyclerView.layoutManager = LinearLayoutManager(this)
-                            binding.bookRecyclerView.adapter = adapter*/
+//                            adapterView.notifyAdapter()
                         }
                     }
 
@@ -48,6 +43,7 @@ class BookPresenter : BookContract.Presenter {
                     Log.d("TestApp2", "${t.toString()}")
                 }
             })
+
     }
 
 

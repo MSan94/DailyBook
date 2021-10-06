@@ -6,11 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.prj.dailybook.contract.BestSellerContract
 import com.prj.dailybook.databinding.ActivityBestsellerBinding
 import com.prj.dailybook.presenter.BestSellerPresenter
+import com.prj.dailybook.presenter.BookPresenter
 import com.prj.dailybook.util.PropertiesData
 import com.prj.dailybook.util.`interface`.DetailInterface
 import com.prj.dailybook.util.adapter.BookAdapter
 import com.prj.dailybook.util.model.BestSellerDto
 import com.prj.dailybook.util.model.Book
+import com.prj.dailybook.util.model.BookListData
 import com.prj.dailybook.util.retrofit.RetrofitObject
 import com.prj.dailybook.view.dialog.BookDetailFragment
 import retrofit2.Call
@@ -28,31 +30,20 @@ class BestSellerActivity() : AppCompatActivity(), BestSellerContract.View, Detai
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         init()
-
-        /** presenter로 옮길 예정 **/
-        val responseService = RetrofitObject.apiService.getBestSellerBooks(PropertiesData.SERVICE_KEY)
-                .enqueue(object : Callback<BestSellerDto> {
-                    override fun onResponse(call: Call<BestSellerDto>, response: Response<BestSellerDto>) {
-                        if(response.isSuccessful.not()){
-                            return
-                        }
-                        response.body()?.let {
-                            adapter.submitList(it.books)
-                        }
-
-                    }
-                    override fun onFailure(call: Call<BestSellerDto>, t: Throwable) {
-                        TODO("Not yet implemented")
-                    }
-                })
-
-        binding.bookRecyclerView.layoutManager = LinearLayoutManager(this)
-        binding.bookRecyclerView.adapter = adapter
     }
 
     override fun init() {
-        presenter = BestSellerPresenter()
-        presenter.setView(this)
+        binding.bookRecyclerView.layoutManager = LinearLayoutManager(this)
+        binding.bookRecyclerView.adapter = adapter
+
+        presenter = BestSellerPresenter().apply {
+            view = this@BestSellerActivity
+            adapterView = adapter
+            adapterModel = adapter
+            book = BookListData
+        }
+
+        presenter.getBestSeller(this,false)
     }
 
     companion object{

@@ -23,7 +23,7 @@ class BookAdapter(val detailInterface : DetailInterface) : ListAdapter<Book, Boo
 
     inner class BookItemViewHolder(private val binding : ItemBookBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(bookModel : Book){
-            Log.d("TestApp2", "실행1")
+            Log.d("TestAppAdapter", "호출5")
             binding.textViewDescription.text = bookModel.description
             binding.textViewTitle.text = bookModel.title
             Glide
@@ -40,35 +40,43 @@ class BookAdapter(val detailInterface : DetailInterface) : ListAdapter<Book, Boo
             binding.constraintTop.setOnClickListener {
                 detailInterface.getModel(bookModel)
             }
+            binding.imageViewJjim.setOnClickListener { 
+                Log.d("Test", "찜 클릭")
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookItemViewHolder {
-        Log.d("TestApp2", "실행2")
+        Log.d("TestAppAdapter", "호출3")
         return BookItemViewHolder(ItemBookBinding.inflate(LayoutInflater.from(parent.context),parent, false))
     }
 
+    override fun getItemCount(): Int {
+        return bookList.size
+    }
+
     override fun onBindViewHolder(holder: BookItemViewHolder, position: Int) {
-        holder.bind(currentList[position])
+        Log.d("TestAppAdapter", "호출4")
+        holder.bind(bookList[position])
     }
 
 
     override fun notifyAdapter() {
-//        this.notifyDataSetChanged()
-        Log.d("TestApp2", "실행4  ${bookList.size}")
+        notifyDataSetChanged()
+        Log.d("TestAppAdapter", "호출2")
     }
 
     override fun addItems(items: ArrayList<Book>) {
-        Log.d("TestApp2", "실행5")
-        clearItem()
-        this.bookList.addAll(items)
-        this.notifyDataSetChanged()
-        Log.d("TestApp2", "실행5 ${bookList.size}")
+//        this.bookList.addAll(items)
+        bookList.clear()
+        bookList = items
+        notifyDataSetChanged()
+        Log.d("TestAppAdapter", "호출1")
     }
 
     override fun clearItem() {
-        Log.d("TestApp2", "실행6")
         bookList.clear()
+        Log.d("TestAppAdapter", "호출0")
     }
 
     //같은 아이템인지 판단 , 결정

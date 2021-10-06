@@ -2,6 +2,6 @@
 <resources>
     <!--<dimen name="popup_width">1200px</dimen>
     <dimen name="popup_height">1800px</dimen>-->
-    <dimen name="popup_width">800px</dimen>
+    <dimen name="popup_width">650px</dimen>
     <dimen name="popup_height">1000px</dimen>
 </resources>

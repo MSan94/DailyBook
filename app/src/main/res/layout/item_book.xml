@@ -26,22 +26,29 @@
         <TextView
             android:id="@+id/textView_Title"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:layout_marginStart="10dp"
             android:ellipsize="end"
             android:fontFamily="@font/nanumsquareroundeb"
             android:lines="1"
             android:textColor="@color/black"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageView_Jjim"
             app:layout_constraintStart_toEndOf="@+id/imageView_Cover"
             app:layout_constraintTop_toTopOf="parent" />
-
+        <ImageView
+            android:background="@drawable/star"
+            android:id="@+id/imageView_Jjim"
+            app:layout_constraintStart_toEndOf="@+id/textView_Title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="20dp"
+            android:layout_height="20dp"/>
         <TextView
             android:id="@+id/textView_description"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="5dp"
             android:ellipsize="end"
             android:fontFamily="@font/nanumsquareroundeb"
             android:lines="3"

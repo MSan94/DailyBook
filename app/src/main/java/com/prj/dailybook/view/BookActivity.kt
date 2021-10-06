@@ -28,7 +28,7 @@ class BookActivity : AppCompatActivity(), BookContract.View, DetailInterface {
 
     override lateinit var presenter: BookContract.Presenter
     val binding by lazy { ActivityBookBinding.inflate(layoutInflater) }
-    lateinit var adapter : BookAdapter
+    lateinit var adapter: BookAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +37,6 @@ class BookActivity : AppCompatActivity(), BookContract.View, DetailInterface {
     }
 
     override fun init() {
-
         adapter = BookAdapter(this)
         binding.bookRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.bookRecyclerView.adapter = adapter
@@ -47,10 +46,9 @@ class BookActivity : AppCompatActivity(), BookContract.View, DetailInterface {
             adapterModel = adapter
             book = BookListData
         }
-
         binding.btnSearch.setOnClickListener {
-            if(binding.editTextSearch.text.isEmpty()){
-                Toast.makeText(this,"검색어를 입력해주세요.", Toast.LENGTH_SHORT).show()
+            if (binding.editTextSearch.text.isEmpty()) {
+                Toast.makeText(this, "검색어를 입력해주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             search(binding.editTextSearch.text.toString())
@@ -58,7 +56,6 @@ class BookActivity : AppCompatActivity(), BookContract.View, DetailInterface {
     }
 
     override fun showProgress() {
-
     }
 
     override fun hideProgress() {
@@ -66,7 +63,7 @@ class BookActivity : AppCompatActivity(), BookContract.View, DetailInterface {
     }
 
     override fun search(search: String) {
-        presenter.getBookList(search,this,false)
+        presenter.getBookList(search, this, false)
     }
 
     override fun recyclerInit() {
