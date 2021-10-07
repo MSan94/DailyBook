@@ -75,7 +75,7 @@ class BookActivity : AppCompatActivity(), BookContract.View, DetailInterface {
     }
 
     override fun goStore(model: Book) {
-        Toast.makeText(this,"찜",Toast.LENGTH_SHORT).show()
+
     }
 
 

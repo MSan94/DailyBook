@@ -50,6 +50,10 @@ class BestSellerActivity() : AppCompatActivity(), BestSellerContract.View, Detai
         presenter.getBestSeller(this,false)
     }
 
+    override fun setBucketBook() {
+        Toast.makeText(this,"찜목록에 추가하였습니다.",Toast.LENGTH_SHORT).show()
+    }
+
     companion object{
         private const val TAG = "RetrofitResult"
     }
@@ -65,6 +69,6 @@ class BestSellerActivity() : AppCompatActivity(), BestSellerContract.View, Detai
     }
 
     override fun goStore(model: Book) {
-        Toast.makeText(this,"찜",Toast.LENGTH_SHORT).show()
+        presenter.saveBook(this,model)
     }
 }

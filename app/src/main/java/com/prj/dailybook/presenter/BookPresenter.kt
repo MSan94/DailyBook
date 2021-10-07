@@ -9,6 +9,7 @@ import com.prj.dailybook.util.model.Book
 import com.prj.dailybook.util.model.BookListData
 import com.prj.dailybook.util.model.SearchBookDto
 import com.prj.dailybook.util.retrofit.RetrofitObject
+import com.prj.dailybook.util.room.RoomObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,6 +18,9 @@ class BookPresenter : BookContract.Presenter {
     override lateinit var book: BookListData
     override lateinit var adapterModel: AdapterContract.Model
     override lateinit var adapterView: AdapterContract.View
+
+    private var roomObject : RoomObject? = null
+
     var idx = 0
 
 

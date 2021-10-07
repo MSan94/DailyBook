@@ -2,6 +2,7 @@ package com.prj.dailybook.presenter
 
 import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import com.prj.dailybook.contract.AdapterContract
 import com.prj.dailybook.contract.BestSellerContract
 import com.prj.dailybook.contract.BookContract
@@ -10,6 +11,8 @@ import com.prj.dailybook.util.model.BestSellerDto
 import com.prj.dailybook.util.model.Book
 import com.prj.dailybook.util.model.BookListData
 import com.prj.dailybook.util.retrofit.RetrofitObject
+import com.prj.dailybook.util.room.Bucket
+import com.prj.dailybook.util.room.RoomObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,6 +24,7 @@ class BestSellerPresenter : BestSellerContract.Presenter {
     override lateinit var book: BookListData
     override lateinit var adapterModel: AdapterContract.Model
     override lateinit var adapterView: AdapterContract.View
+    private var roomObject : RoomObject? = null
 
     override fun getBestSeller(context: Context, isClear: Boolean) {
         val responseService = RetrofitObject.apiService.getBestSellerBooks(PropertiesData.SERVICE_KEY)
@@ -45,6 +49,14 @@ class BestSellerPresenter : BestSellerContract.Presenter {
                 }
             })
 
+    }
+
+    override fun saveBook(context: Context, model : Book) {
+        val bucket = Bucket(model.itemId, model.title, model.author, model.coverSmallUrl)
+        Toast.makeText(context,"${bucket.toString()}",Toast.LENGTH_SHORT).show()
+        roomObject = RoomObject.getInstance(context)
+//        roomObject?.bucketDao()?.insertBook(bucket)!!
+//        view.setBucketBook()
     }
 
 
