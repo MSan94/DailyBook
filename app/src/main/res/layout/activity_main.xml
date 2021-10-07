@@ -23,6 +23,8 @@
         android:visibility="gone"
         app:headerLayout="@layout/header"
         app:menu="@menu/contents"
+        app:itemTextColor="@color/black"
+        android:background="@color/background_C"
         tools:ignore="MissingConstraints">
 
         <androidx.constraintlayout.widget.ConstraintLayout

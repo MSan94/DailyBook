@@ -12,9 +12,13 @@
     <color name="background_color">#F0F1F4</color>
     <color name="background_A">#E0DAAE</color>
     <color name="background_B">#A1BAB0</color>
+    <color name="background_C">#ECF4F6</color>
+    <color name="background_D">#C1BCF0</color>
+
     <!-- 폰트 -->
     <color name="font_color_a">#151112</color>
     <color name="font_color_b">#5F5F5F</color>
     <color name="font_color_c">#E45B27</color>
+    <color name="font_color_d">#170B23</color>
 
 </resources>
