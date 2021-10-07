@@ -8,24 +8,21 @@ import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
-import android.widget.Toolbar
-import androidx.appcompat.widget.AppCompatButton
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.prj.dailybook.R
 import com.prj.dailybook.contract.MainContract
 import com.prj.dailybook.databinding.ActivityMainBinding
-import com.prj.dailybook.databinding.HeaderBinding
 import com.prj.dailybook.presenter.MainPresenter
+import com.prj.dailybook.util.adapter.CloseHandler
 import com.prj.dailybook.view.dialog.CloseDialogFragment
 import com.prj.dailybook.view.fragment.DailyFragment
 import com.prj.dailybook.view.fragment.HomeFragment
 import com.prj.dailybook.view.fragment.MyFragment
 
-class MainActivity : AppCompatActivity(), MainContract.View , NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), MainContract.View , NavigationView.OnNavigationItemSelectedListener  {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     override lateinit var presenter: MainContract.Presenter
     private val homeFragment = HomeFragment()
@@ -36,6 +33,7 @@ class MainActivity : AppCompatActivity(), MainContract.View , NavigationView.OnN
     private lateinit var drawerLauout : DrawerLayout
 
     lateinit var bottomNavigationView: BottomNavigationView
+    private val closeHandler : CloseHandler = CloseHandler(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +46,6 @@ class MainActivity : AppCompatActivity(), MainContract.View , NavigationView.OnN
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_dehaze_24) // 햄버거
 //        supportActionBar?.setDisplayShowTitleEnabled(false) //툴바에 타이틀 안보이게
 
-
         barNavigationView = binding.barNavigationView
         barNavigationView.setNavigationItemSelectedListener(this)
 
@@ -56,6 +53,9 @@ class MainActivity : AppCompatActivity(), MainContract.View , NavigationView.OnN
             binding.barNavigationView.visibility = GONE
         }
         binding.btnMenuClose.setOnClickListener {
+            binding.barNavigationView.visibility = GONE
+        }
+        binding.fragmentContainer.setOnClickListener {
             binding.barNavigationView.visibility = GONE
         }
 
@@ -125,4 +125,13 @@ class MainActivity : AppCompatActivity(), MainContract.View , NavigationView.OnN
         }
         return false
     }
+
+    override fun onBackPressed() {
+        if(binding.barNavigationView.visibility == VISIBLE){
+            binding.barNavigationView.visibility = GONE
+        }else{
+            closeHandler.onBackPress()
+        }
+    }
+
 }

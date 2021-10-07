@@ -1,43 +1,34 @@
 package com.prj.dailybook.view.fragment
 
-import android.content.Intent
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
-import com.prj.dailybook.contract.BestSellerContract
+import com.bumptech.glide.RequestManager
 import com.prj.dailybook.contract.HomeContract
 import com.prj.dailybook.databinding.FragmentHomeBinding
-import com.prj.dailybook.presenter.BestSellerPresenter
 import com.prj.dailybook.presenter.HomePresenter
-import com.prj.dailybook.util.`interface`.DetailInterface
-import com.prj.dailybook.util.adapter.BookAdapter
 import com.prj.dailybook.util.adapter.ViewPagerAdapter
 import com.prj.dailybook.util.model.Book
 import com.prj.dailybook.util.model.BookListData
 import com.prj.dailybook.util.model.Music
-import com.prj.dailybook.view.BestSellerActivity
-import com.prj.dailybook.view.BookActivity
-import com.prj.dailybook.view.dialog.CloseDialogFragment
 
-class HomeFragment : Fragment() , HomeContract.View {
+class HomeFragment : Fragment() , HomeContract.View{
 
     override lateinit var presenter: HomeContract.Presenter
     val binding by lazy { FragmentHomeBinding.inflate(layoutInflater) }
     val adapter = ViewPagerAdapter()
+    lateinit var mGlideRequestManager : RequestManager
 
     //뷰페이저 애니메이션
     inner class ZoomOutPageTransformer : ViewPager2.PageTransformer {
@@ -78,13 +69,18 @@ class HomeFragment : Fragment() , HomeContract.View {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         init()
         textReSize()
         return binding.root
     }
 
     override fun init() {
+        mGlideRequestManager = Glide.with(this)
         binding.viewPagerBook.adapter = adapter
         binding.viewPagerBook.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         binding.viewPagerBook.setPageTransformer(ZoomOutPageTransformer())
@@ -95,28 +91,36 @@ class HomeFragment : Fragment() , HomeContract.View {
             book = BookListData
         }
 
-        context?.let { presenter.getData(it,false) }
+        context?.let { presenter.getData(it, false) }
         presenter.getMusic()
         presenter.getForeBook()
         presenter.getHealthBook()
+
+        binding.homeLayout.setOnClickListener {
+            Log.d("TouchEvent", "클릭")
+        }
 
     }
 
     override fun setMusic(musicList: List<Music>) {
         if(musicList.size > 1){
             for(i in 0..1){
-                Log.d("TextTestTitle",musicList[i].title.toString())
+                Log.d("TextTestTitle", musicList[i].title.toString())
                 if(i == 0){
-                    Glide
-                        .with(binding.imageViewBottomLeft.context)
-                        .load(musicList[i].coverLargeUrl)
-                        .into(binding.imageViewBottomLeft)
+                    activity?.let {
+                        Glide
+                            .with(it)
+                            .load(musicList[i].coverLargeUrl)
+                            .into(binding.imageViewBottomLeft)
+                    }
                     binding.textViewBottomLeft.text = musicList[i].title
                 }else{
-                    Glide
-                        .with(binding.imageViewBottomRight.context)
-                        .load(musicList[i].coverLargeUrl)
-                        .into(binding.imageViewBottomRight)
+                    activity?.let {
+                        Glide
+                            .with(it)
+                            .load(musicList[i].coverLargeUrl)
+                            .into(binding.imageViewBottomRight)
+                    }
                     binding.textViewBottomRight.text = musicList[i].title
                 }
             }
@@ -124,17 +128,21 @@ class HomeFragment : Fragment() , HomeContract.View {
     }
 
     override fun setForeBook(foreBook: Book) {
-        Glide
-            .with(binding.imageViewMidRightCover.context)
-            .load(foreBook.coverLargeUrl)
-            .into(binding.imageViewMidRightCover)
+        activity?.let {
+            Glide
+                .with(it)
+                .load(foreBook.coverLargeUrl)
+                .into(binding.imageViewMidRightCover)
+        }
     }
 
     override fun setHealthBook(healthBook: Book) {
-        Glide
-            .with(binding.imageViewMidLeftCover.context)
-            .load(healthBook.coverLargeUrl)
-            .into(binding.imageViewMidLeftCover)
+        activity?.let {
+            Glide
+                .with(it)
+                .load(healthBook.coverLargeUrl)
+                .into(binding.imageViewMidLeftCover)
+        }
     }
 
     override fun textReSize() {
@@ -143,8 +151,13 @@ class HomeFragment : Fragment() , HomeContract.View {
         val word = "TOP5"
         val start = content.indexOf(word)
         val end = start + word.length
-        sb.setSpan(ForegroundColorSpan(Color.parseColor("#C2185B")), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        sb.setSpan(RelativeSizeSpan(1.3f),start,end,SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
+        sb.setSpan(
+            ForegroundColorSpan(Color.parseColor("#C2185B")),
+            start,
+            end,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        sb.setSpan(RelativeSizeSpan(1.3f), start, end, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding.textViewTopTitle.text = sb
     }
 
@@ -153,5 +166,6 @@ class HomeFragment : Fragment() , HomeContract.View {
         private const val MIN_SCALE = 0.85f
         private const val MIN_ALPHA = 0.5f
     }
+
 
 }
