@@ -1,6 +1,8 @@
 package com.prj.dailybook.view
 
 import android.os.Bundle
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import com.prj.dailybook.contract.BookContract
 import com.prj.dailybook.contract.BucketContract
@@ -17,7 +19,19 @@ class BucketActivity : AppCompatActivity() , BucketContract.View {
     }
 
     override fun init() {
+        binding.btnBucket.setOnClickListener {
+            trasferList()
+            binding.textViewBucketTitle.text = "책 저장 리스트"
+        }
+        binding.btnMusic.setOnClickListener {
+            trasferList()
+            binding.textViewBucketTitle.text = "음반 저장 리스트"
+        }
+    }
 
+    override fun trasferList() {
+        binding.constraintContents.visibility = GONE
+        binding.constraintList.visibility = VISIBLE
     }
 
 }

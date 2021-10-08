@@ -8,6 +8,7 @@ interface BucketContract {
 
     interface View : BaseView<Presenter> {
         override fun init()
+        fun trasferList()
     }
 
     interface Presenter : BasePresenter {

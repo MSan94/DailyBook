@@ -123,9 +123,18 @@ class HomeFragment : Fragment() , HomeContract.View{
                 return false
             }
         })
-        
+
+        binding.imgBtnMenu1.setOnClickListener {
+//            closeListener.goActivity("1")
+            closeListener.onCloseMenu()
+        }
+        binding.imgBtnMenu2.setOnClickListener {
+//            closeListener.goActivity("2")
+            closeListener.onCloseMenu()
+        }
         binding.imgBtnMenu3.setOnClickListener {
             closeListener.goActivity("3")
+            closeListener.onCloseMenu()
         }
 
     }
