@@ -13,7 +13,10 @@ interface BookContract {
         fun showProgress()
         fun hideProgress()
         fun search(search: String)
-        fun recyclerInit();
+        fun recyclerInit()
+
+
+        fun setBucketBook(type : String)
     }
 
     interface Presenter : BasePresenter {
@@ -23,6 +26,7 @@ interface BookContract {
         var adapterView : AdapterContract.View
 
         fun getBookList(search : String, context: Context, isClear: Boolean)
+        fun saveBook(context: Context, book : Book)
     }
 
 }

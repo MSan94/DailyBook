@@ -1,23 +1,18 @@
 package com.prj.dailybook.util.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.manager.SupportRequestManagerFragment
 import com.prj.dailybook.contract.AdapterContract
 import com.prj.dailybook.databinding.ItemBookBinding
-import com.prj.dailybook.util.`interface`.DetailInterface
+import com.prj.dailybook.util.listener.BookInterface
 import com.prj.dailybook.util.model.Book
-import com.prj.dailybook.view.dialog.BookDetailFragment
-import com.prj.dailybook.view.dialog.CloseDialogFragment
 
 
-class BookAdapter(val detailInterface : DetailInterface) : ListAdapter<Book, BookAdapter.BookItemViewHolder>(diffUtil), AdapterContract.View, AdapterContract.Model {
+class BookAdapter(val listener : BookInterface) : ListAdapter<Book, BookAdapter.BookItemViewHolder>(diffUtil), AdapterContract.View, AdapterContract.Model {
 
     private var bookList : ArrayList<Book> = ArrayList()
 
@@ -43,13 +38,13 @@ class BookAdapter(val detailInterface : DetailInterface) : ListAdapter<Book, Boo
                 binding.textViewTmp.text = "순위 : ${bookModel.rank}"
             }
             binding.constraintTop.setOnClickListener {
-                detailInterface.getModel(bookModel)
+                listener.getModel(bookModel)
             }
             binding.textViewBuy.setOnClickListener {
-                detailInterface.goBuy(bookModel.additionalLink.toString())
+                listener.goBuy(bookModel.additionalLink.toString())
             }
             binding.textViewJjim.setOnClickListener {
-                detailInterface.goStore(bookModel)
+                listener.goStore(bookModel)
             }
         }
     }

@@ -11,7 +11,7 @@ interface BestSellerContract {
 
     interface View : BaseView<Presenter> {
         override fun init()
-        fun setBucketBook()
+        fun setBucketBook(type : String)
     }
 
     interface Presenter : BasePresenter {

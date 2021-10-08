@@ -7,10 +7,9 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "bucket")
 data class Bucket(
-    @ColumnInfo val itemId: Long,
+    @PrimaryKey val itemId: Long,
     @ColumnInfo val title: String,
     @ColumnInfo val author: String?,
-    @ColumnInfo val coverSmallUrl: String?
-){
-    @PrimaryKey(autoGenerate = true) var id = 0
-}
+    @ColumnInfo val coverSmallUrl: String?,
+    @ColumnInfo val type : String
+)

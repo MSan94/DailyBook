@@ -5,7 +5,6 @@ import android.util.Log
 import android.widget.Toast
 import com.prj.dailybook.contract.AdapterContract
 import com.prj.dailybook.contract.BestSellerContract
-import com.prj.dailybook.contract.BookContract
 import com.prj.dailybook.util.PropertiesData
 import com.prj.dailybook.util.model.BestSellerDto
 import com.prj.dailybook.util.model.Book
@@ -16,6 +15,7 @@ import com.prj.dailybook.util.room.RoomObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.concurrent.thread
 
 class BestSellerPresenter : BestSellerContract.Presenter {
 
@@ -45,18 +45,30 @@ class BestSellerPresenter : BestSellerContract.Presenter {
 
                 }
                 override fun onFailure(call: Call<BestSellerDto>, t: Throwable) {
-                    TODO("Not yet implemented")
                 }
             })
 
     }
 
     override fun saveBook(context: Context, model : Book) {
-        val bucket = Bucket(model.itemId, model.title, model.author, model.coverSmallUrl)
-        Toast.makeText(context,"${bucket.toString()}",Toast.LENGTH_SHORT).show()
+        val bucket = Bucket(model.itemId, model.title, model.author, model.coverSmallUrl,"book")
         roomObject = RoomObject.getInstance(context)
-//        roomObject?.bucketDao()?.insertBook(bucket)!!
-//        view.setBucketBook()
+        thread(start = true) {
+            var result = roomObject?.bucketDao()?.validItem(model.itemId)
+            when(result){
+                0 -> {
+                    roomObject?.bucketDao()?.insertBook(bucket)!!
+                    view.setBucketBook("1")
+                }
+                else -> {
+                    view.setBucketBook("2")
+                }
+            }
+            val list : List<Bucket>? = roomObject?.bucketDao()?.getAll()
+            for(i in list!!.indices){
+                Log.d("ListTest", list[i].toString())
+            }
+        }
     }
 
 

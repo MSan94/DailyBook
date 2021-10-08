@@ -3,19 +3,21 @@ package com.prj.dailybook.view
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prj.dailybook.contract.BookContract
 import com.prj.dailybook.databinding.ActivityBookBinding
 import com.prj.dailybook.presenter.BookPresenter
-import com.prj.dailybook.util.`interface`.DetailInterface
 import com.prj.dailybook.util.adapter.BookAdapter
+import com.prj.dailybook.util.listener.BookInterface
 import com.prj.dailybook.util.model.Book
 import com.prj.dailybook.util.model.BookListData
 import com.prj.dailybook.view.dialog.BookDetailFragment
 
-class BookActivity : AppCompatActivity(), BookContract.View, DetailInterface {
+class BookActivity : AppCompatActivity(), BookContract.View, BookInterface {
 
     override lateinit var presenter: BookContract.Presenter
     val binding by lazy { ActivityBookBinding.inflate(layoutInflater) }
@@ -64,6 +66,22 @@ class BookActivity : AppCompatActivity(), BookContract.View, DetailInterface {
     override fun recyclerInit() {
     }
 
+    override fun setBucketBook(type : String) {
+        val handler = Handler(Looper.getMainLooper());
+        when(type){
+            "1" -> {
+                handler.postDelayed(Runnable {
+                    Toast.makeText(this, "목록에 저장하였습니다.", Toast.LENGTH_SHORT).show()
+                },0)
+            }
+            "2" -> {
+                handler.postDelayed(Runnable {
+                    Toast.makeText(this, "이미 저장 하신 상품입니다.", Toast.LENGTH_SHORT).show()
+                },0)
+            }
+        }
+    }
+
     override fun getModel(model: Book) {
         val dialog = BookDetailFragment(model)
         dialog.show(supportFragmentManager, "detailDialog")
@@ -75,7 +93,7 @@ class BookActivity : AppCompatActivity(), BookContract.View, DetailInterface {
     }
 
     override fun goStore(model: Book) {
-
+        presenter.saveBook(this,model)
     }
 
 

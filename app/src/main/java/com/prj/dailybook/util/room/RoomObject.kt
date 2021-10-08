@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Bucket::class], version = 1)
+@Database(entities = [Bucket::class], version = 2)
 abstract class RoomObject : RoomDatabase(){
 
     abstract fun bucketDao() : BucketDao
@@ -22,6 +22,10 @@ abstract class RoomObject : RoomDatabase(){
                 }
             }
             return INSTANCE
+        }
+
+        fun delInstance(){
+            INSTANCE = null
         }
     }
 

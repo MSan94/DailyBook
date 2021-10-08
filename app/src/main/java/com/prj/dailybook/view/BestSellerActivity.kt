@@ -3,26 +3,21 @@ package com.prj.dailybook.view
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prj.dailybook.contract.BestSellerContract
 import com.prj.dailybook.databinding.ActivityBestsellerBinding
 import com.prj.dailybook.presenter.BestSellerPresenter
-import com.prj.dailybook.presenter.BookPresenter
-import com.prj.dailybook.util.PropertiesData
-import com.prj.dailybook.util.`interface`.DetailInterface
+import com.prj.dailybook.util.listener.BookInterface
 import com.prj.dailybook.util.adapter.BookAdapter
-import com.prj.dailybook.util.model.BestSellerDto
 import com.prj.dailybook.util.model.Book
 import com.prj.dailybook.util.model.BookListData
-import com.prj.dailybook.util.retrofit.RetrofitObject
 import com.prj.dailybook.view.dialog.BookDetailFragment
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class BestSellerActivity() : AppCompatActivity(), BestSellerContract.View, DetailInterface {
+class BestSellerActivity() : AppCompatActivity(), BestSellerContract.View, BookInterface {
 
     private val binding by lazy { ActivityBestsellerBinding.inflate(layoutInflater) }
     override lateinit var presenter: BestSellerContract.Presenter
@@ -50,8 +45,20 @@ class BestSellerActivity() : AppCompatActivity(), BestSellerContract.View, Detai
         presenter.getBestSeller(this,false)
     }
 
-    override fun setBucketBook() {
-        Toast.makeText(this,"찜목록에 추가하였습니다.",Toast.LENGTH_SHORT).show()
+    override fun setBucketBook(type : String) {
+        val handler = Handler(Looper.getMainLooper());
+        when(type){
+            "1" -> {
+                handler.postDelayed(Runnable {
+                    Toast.makeText(this, "목록에 저장하였습니다.", Toast.LENGTH_SHORT).show()
+                },0)
+            }
+            "2" -> {
+                handler.postDelayed(Runnable {
+                    Toast.makeText(this, "이미 저장 하신 상품입니다.", Toast.LENGTH_SHORT).show()
+                },0)
+            }
+        }
     }
 
     companion object{

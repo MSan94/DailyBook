@@ -18,10 +18,18 @@ interface BucketDao {
     @Insert
     fun insertMusic(music : Bucket)
 
+    @Query("DELETE FROM bucket")
+    fun deleteAll()
+
+    @Query("SELECT count(*) FROM bucket WHERE itemId =:itemId")
+    fun validItem(itemId : Long) : Int
+
     @Delete
     fun deleteBook(book : Bucket)
 
     @Delete
     fun deleteMusic(music : Bucket)
+
+
 
 }

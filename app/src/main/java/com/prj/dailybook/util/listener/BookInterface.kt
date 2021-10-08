@@ -1,9 +1,8 @@
-package com.prj.dailybook.util.`interface`
+package com.prj.dailybook.util.listener
 
 import com.prj.dailybook.util.model.Book
-import java.text.FieldPosition
 
-interface DetailInterface {
+interface BookInterface {
     fun getModel(model : Book)
     fun goBuy(url : String)
     fun goStore(model : Book)
