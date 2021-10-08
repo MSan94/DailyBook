@@ -22,7 +22,7 @@ import com.prj.dailybook.view.fragment.DailyFragment
 import com.prj.dailybook.view.fragment.HomeFragment
 import com.prj.dailybook.view.fragment.MyFragment
 
-class MainActivity : AppCompatActivity(), MainContract.View , NavigationView.OnNavigationItemSelectedListener  {
+class MainActivity : AppCompatActivity(), MainContract.View , NavigationView.OnNavigationItemSelectedListener, HomeFragment.OnCloseListener  {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     override lateinit var presenter: MainContract.Presenter
     private val homeFragment = HomeFragment()
@@ -66,18 +66,22 @@ class MainActivity : AppCompatActivity(), MainContract.View , NavigationView.OnN
 
     /** 초기화 **/
     override fun init() {
+        binding.barNavigationView.visibility = GONE
         presenter = MainPresenter()
         presenter.setView(this)
         bottomNavigationView = binding.bottomNavigationView
         bottomNavigationView.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.home -> {
+                    binding.barNavigationView.visibility = GONE
                     replaceFragment(homeFragment)
                 }
                 R.id.daily -> {
+                    binding.barNavigationView.visibility = GONE
                     replaceFragment(dailyFragment)
                 }
                 R.id.my -> {
+                    binding.barNavigationView.visibility = GONE
                     replaceFragment(myFragment)
                 }
             }
@@ -133,5 +137,19 @@ class MainActivity : AppCompatActivity(), MainContract.View , NavigationView.OnN
             closeHandler.onBackPress()
         }
     }
+
+    override fun onCloseMenu() {
+        binding.barNavigationView.visibility = GONE
+    }
+
+    override fun goActivity(type: String) {
+        when(type){
+            "3" ->{
+                val intent = Intent(this, BucketActivity::class.java)
+                startActivity(intent)
+            }
+        }
+    }
+
 
 }

@@ -35,7 +35,7 @@
                 android:id="@+id/btn_Menu_Close"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_no_button"
+                android:background="@drawable/custom_close_button"
                 android:text="메뉴닫기"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"

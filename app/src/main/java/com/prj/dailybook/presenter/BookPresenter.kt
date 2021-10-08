@@ -61,9 +61,11 @@ class BookPresenter : BookContract.Presenter {
                 0 -> {
                     roomObject?.bucketDao()?.insertBook(bucket)!!
                     view.setBucketBook("1")
+                    RoomObject.delInstance()
                 }
                 else -> {
                     view.setBucketBook("2")
+                    RoomObject.delInstance()
                 }
             }
         }

@@ -1,5 +1,7 @@
 package com.prj.dailybook.view.fragment
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
@@ -29,6 +31,12 @@ class HomeFragment : Fragment() , HomeContract.View{
     val binding by lazy { FragmentHomeBinding.inflate(layoutInflater) }
     val adapter = ViewPagerAdapter()
     lateinit var mGlideRequestManager : RequestManager
+
+    interface OnCloseListener {
+        fun onCloseMenu()
+        fun goActivity(type : String)
+    }
+    private lateinit var closeListener : OnCloseListener
 
     //뷰페이저 애니메이션
     inner class ZoomOutPageTransformer : ViewPager2.PageTransformer {
@@ -69,6 +77,13 @@ class HomeFragment : Fragment() , HomeContract.View{
         }
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if(activity != null && activity is OnCloseListener){
+            closeListener = activity as OnCloseListener
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -79,6 +94,7 @@ class HomeFragment : Fragment() , HomeContract.View{
         return binding.root
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun init() {
         mGlideRequestManager = Glide.with(this)
         binding.viewPagerBook.adapter = adapter
@@ -97,7 +113,19 @@ class HomeFragment : Fragment() , HomeContract.View{
         presenter.getHealthBook()
 
         binding.homeLayout.setOnClickListener {
-            Log.d("TouchEvent", "클릭")
+            closeListener.onCloseMenu()
+        }
+        binding.scrollViewContents.setOnTouchListener(object : View.OnTouchListener{
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                if(event?.action == MotionEvent.ACTION_DOWN){
+                    closeListener.onCloseMenu()
+                }
+                return false
+            }
+        })
+        
+        binding.imgBtnMenu3.setOnClickListener {
+            closeListener.goActivity("3")
         }
 
     }
@@ -161,6 +189,9 @@ class HomeFragment : Fragment() , HomeContract.View{
         binding.textViewTopTitle.text = sb
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+    }
 
     companion object{
         private const val MIN_SCALE = 0.85f

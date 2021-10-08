@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".view.BestSellerActivity"/>
         <activity android:name=".view.BookActivity"/>
+        <activity android:name=".view.BucketActivity"/>
     </application>
 
 </manifest>
