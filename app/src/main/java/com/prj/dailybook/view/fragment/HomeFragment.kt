@@ -25,6 +25,10 @@ import com.prj.dailybook.util.model.Book
 import com.prj.dailybook.util.model.BookListData
 import com.prj.dailybook.util.model.Music
 
+/**
+ * @author 안명성
+ */
+
 class HomeFragment : Fragment() , HomeContract.View{
 
     override lateinit var presenter: HomeContract.Presenter
@@ -32,13 +36,15 @@ class HomeFragment : Fragment() , HomeContract.View{
     val adapter = ViewPagerAdapter()
     lateinit var mGlideRequestManager : RequestManager
 
+
+    /** 액티비티 관련 리스너 **/
     interface OnCloseListener {
         fun onCloseMenu()
         fun goActivity(type : String)
     }
     private lateinit var closeListener : OnCloseListener
 
-    //뷰페이저 애니메이션
+    /** 뷰페이저 애니메이션 **/
     inner class ZoomOutPageTransformer : ViewPager2.PageTransformer {
         override fun transformPage(view: View, position: Float) {
             view.apply {
@@ -94,6 +100,7 @@ class HomeFragment : Fragment() , HomeContract.View{
         return binding.root
     }
 
+    /** 초기화 **/
     @SuppressLint("ClickableViewAccessibility")
     override fun init() {
         mGlideRequestManager = Glide.with(this)
@@ -139,6 +146,8 @@ class HomeFragment : Fragment() , HomeContract.View{
 
     }
 
+
+    /** 메인 음반 정보 SET **/
     override fun setMusic(musicList: List<Music>) {
         if(musicList.size > 1){
             for(i in 0..1){
@@ -164,6 +173,7 @@ class HomeFragment : Fragment() , HomeContract.View{
         }
     }
 
+    /** 메인 외국1위 도서 SET **/
     override fun setForeBook(foreBook: Book) {
         activity?.let {
             Glide
@@ -173,6 +183,7 @@ class HomeFragment : Fragment() , HomeContract.View{
         }
     }
 
+    /** 메인 건강도서 SET **/
     override fun setHealthBook(healthBook: Book) {
         activity?.let {
             Glide
@@ -182,6 +193,7 @@ class HomeFragment : Fragment() , HomeContract.View{
         }
     }
 
+    /** 메인 글꼴 관련 재조정 **/
     override fun textReSize() {
         val content = binding.textViewTopTitle.text.toString()
         val sb : SpannableString = SpannableString(content)

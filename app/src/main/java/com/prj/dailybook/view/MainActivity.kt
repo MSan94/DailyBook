@@ -22,18 +22,21 @@ import com.prj.dailybook.view.fragment.DailyFragment
 import com.prj.dailybook.view.fragment.HomeFragment
 import com.prj.dailybook.view.fragment.MyFragment
 
-class MainActivity : AppCompatActivity(), MainContract.View , NavigationView.OnNavigationItemSelectedListener, HomeFragment.OnCloseListener  {
+/**
+ * @author 안명성
+ */
+class MainActivity : AppCompatActivity(), MainContract.View,
+    NavigationView.OnNavigationItemSelectedListener, HomeFragment.OnCloseListener {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     override lateinit var presenter: MainContract.Presenter
     private val homeFragment = HomeFragment()
     private val dailyFragment = DailyFragment()
     private val myFragment = MyFragment()
 
-    lateinit var barNavigationView : NavigationView
-    private lateinit var drawerLauout : DrawerLayout
+    lateinit var barNavigationView: NavigationView
 
     lateinit var bottomNavigationView: BottomNavigationView
-    private val closeHandler : CloseHandler = CloseHandler(this)
+    private val closeHandler: CloseHandler = CloseHandler(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +51,20 @@ class MainActivity : AppCompatActivity(), MainContract.View , NavigationView.OnN
 
         barNavigationView = binding.barNavigationView
         barNavigationView.setNavigationItemSelectedListener(this)
+        init()
+        initFragment()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.barNavigationView.visibility = GONE
+    }
+
+    /** 초기화 **/
+    override fun init() {
+        binding.barNavigationView.visibility = GONE
+        presenter = MainPresenter()
+        presenter.setView(this)
 
         binding.mainLayout.setOnClickListener {
             binding.barNavigationView.visibility = GONE
@@ -58,20 +75,10 @@ class MainActivity : AppCompatActivity(), MainContract.View , NavigationView.OnN
         binding.fragmentContainer.setOnClickListener {
             binding.barNavigationView.visibility = GONE
         }
-
-
-        init()
-        initFragment()
-    }
-
-    /** 초기화 **/
-    override fun init() {
-        binding.barNavigationView.visibility = GONE
-        presenter = MainPresenter()
-        presenter.setView(this)
+        
         bottomNavigationView = binding.bottomNavigationView
         bottomNavigationView.setOnNavigationItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.home -> {
                     binding.barNavigationView.visibility = GONE
                     replaceFragment(homeFragment)
@@ -88,12 +95,13 @@ class MainActivity : AppCompatActivity(), MainContract.View , NavigationView.OnN
             true
         }
     }
-    
+
     /** 초기 프래그먼트 할당 **/
     override fun initFragment() {
         replaceFragment(homeFragment)
     }
 
+    /** 프래그먼트 변경 **/
     override fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .apply {
@@ -105,17 +113,19 @@ class MainActivity : AppCompatActivity(), MainContract.View , NavigationView.OnN
     override fun onDestroy() {
         super.onDestroy()
     }
-
+    
+    /** 햄버거 아이콘 클릭 **/
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         binding.barNavigationView.visibility = VISIBLE
 
         return super.onOptionsItemSelected(item)
     }
-
+    
+    /** 사이드 메뉴 선택 **/
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.menu_item1 -> {
-                val intent = Intent(this,BestSellerActivity::class.java)
+                val intent = Intent(this, BestSellerActivity::class.java)
                 startActivity(intent)
             }
             R.id.menu_item2 -> {
@@ -124,27 +134,31 @@ class MainActivity : AppCompatActivity(), MainContract.View , NavigationView.OnN
             }
             R.id.menu_item4 -> {
                 val dialog = CloseDialogFragment()
-                dialog.show(supportFragmentManager,"closeDialog")
+                dialog.show(supportFragmentManager, "closeDialog")
             }
         }
         return false
     }
-
+    
+    
+    /** 뒤로가기 버튼 이벤트 **/
     override fun onBackPressed() {
-        if(binding.barNavigationView.visibility == VISIBLE){
+        if (binding.barNavigationView.visibility == VISIBLE) {
             binding.barNavigationView.visibility = GONE
-        }else{
+        } else {
             closeHandler.onBackPress()
         }
     }
 
+    /** 사이드 메뉴 gone **/
     override fun onCloseMenu() {
         binding.barNavigationView.visibility = GONE
     }
 
+    /** 액티비티 전환 **/
     override fun goActivity(type: String) {
-        when(type){
-            "3" ->{
+        when (type) {
+            "3" -> {
                 val intent = Intent(this, BucketActivity::class.java)
                 startActivity(intent)
             }

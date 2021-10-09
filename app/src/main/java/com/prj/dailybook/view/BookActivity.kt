@@ -17,6 +17,10 @@ import com.prj.dailybook.util.model.Book
 import com.prj.dailybook.util.model.BookListData
 import com.prj.dailybook.view.dialog.BookDetailFragment
 
+/**
+ * @author 안명성
+ */
+
 class BookActivity : AppCompatActivity(), BookContract.View, BookInterface {
 
     override lateinit var presenter: BookContract.Presenter
@@ -31,6 +35,7 @@ class BookActivity : AppCompatActivity(), BookContract.View, BookInterface {
         init()
     }
 
+    /** 초기화 **/
     override fun init() {
         adapter = BookAdapter(this)
         binding.bookRecyclerView.layoutManager = LinearLayoutManager(this)
@@ -58,6 +63,7 @@ class BookActivity : AppCompatActivity(), BookContract.View, BookInterface {
 
     }
 
+    /** 검색 처리 **/
     override fun search(search: String) {
         presenter.getBookList(search, this, false)
         binding.bookRecyclerView.smoothScrollToPosition(0)
@@ -65,7 +71,9 @@ class BookActivity : AppCompatActivity(), BookContract.View, BookInterface {
 
     override fun recyclerInit() {
     }
-
+    
+    
+    /** 찜목록 이벤트 결과 **/
     override fun setBucketBook(type : String) {
         val handler = Handler(Looper.getMainLooper());
         when(type){
@@ -82,16 +90,19 @@ class BookActivity : AppCompatActivity(), BookContract.View, BookInterface {
         }
     }
 
+    /** 아이템 상세 프래그먼트 호출 **/
     override fun getModel(model: Book) {
         val dialog = BookDetailFragment(model)
         dialog.show(supportFragmentManager, "detailDialog")
     }
 
+    /** 구매링크 이동 **/
     override fun goBuy(url: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
     }
 
+    /** 찜목록 추가 이벤트 호출 **/
     override fun goStore(model: Book) {
         presenter.saveBook(this,model)
     }

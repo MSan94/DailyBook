@@ -17,6 +17,9 @@ import com.prj.dailybook.util.model.Book
 import com.prj.dailybook.util.model.BookListData
 import com.prj.dailybook.view.dialog.BookDetailFragment
 
+/**
+ * @author 안명성
+ */
 class BestSellerActivity() : AppCompatActivity(), BestSellerContract.View, BookInterface {
 
     private val binding by lazy { ActivityBestsellerBinding.inflate(layoutInflater) }
@@ -30,6 +33,7 @@ class BestSellerActivity() : AppCompatActivity(), BestSellerContract.View, BookI
         init()
     }
 
+    /** 초기화 **/
     override fun init() {
         binding.bookRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.bookRecyclerView.adapter = adapter
@@ -45,6 +49,7 @@ class BestSellerActivity() : AppCompatActivity(), BestSellerContract.View, BookI
         presenter.getBestSeller(this,false)
     }
 
+    /** 찜목록 추가 결과 **/
     override fun setBucketBook(type : String) {
         val handler = Handler(Looper.getMainLooper());
         when(type){
@@ -60,22 +65,25 @@ class BestSellerActivity() : AppCompatActivity(), BestSellerContract.View, BookI
             }
         }
     }
-
-    companion object{
-        private const val TAG = "RetrofitResult"
-    }
-
+    
+    /** 상세 다이얼로그 호출 **/
     override fun getModel(model: Book) {
         val dialog = BookDetailFragment(model)
         dialog.show(supportFragmentManager, "detailDialog")
     }
 
+    /** 구매링크 이동 **/
     override fun goBuy(url: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
     }
 
+    /** 찜목록 추가 이벤트 호출 **/
     override fun goStore(model: Book) {
         presenter.saveBook(this,model)
+    }
+
+    companion object{
+        private const val TAG = "RetrofitResult"
     }
 }
