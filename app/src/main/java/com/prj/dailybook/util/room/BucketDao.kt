@@ -24,6 +24,9 @@ interface BucketDao {
     @Query("SELECT count(*) FROM bucket WHERE itemId =:itemId")
     fun validItem(itemId : Long) : Int
 
+    @Query("SELECT * FROM bucket WHERE type =:type")
+    fun selectBucket(type : String) : List<Bucket>
+
     @Delete
     fun deleteBook(book : Bucket)
 

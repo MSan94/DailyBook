@@ -24,19 +24,27 @@ class BucketActivity : AppCompatActivity() , BucketContract.View {
     /** 초기화 **/
     override fun init() {
         binding.btnBucket.setOnClickListener {
-            trasferList()
+            trasferList("1")
             binding.textViewBucketTitle.text = "책 저장 리스트"
         }
         binding.btnMusic.setOnClickListener {
-            trasferList()
+            trasferList("2")
             binding.textViewBucketTitle.text = "음반 저장 리스트"
         }
     }
     
     /** 컨텐츠 전환 **/
-    override fun trasferList() {
+    override fun trasferList(type : String) {
         binding.constraintContents.visibility = GONE
         binding.constraintList.visibility = VISIBLE
+        when(type){
+            "1" -> {
+
+            }
+            "2" -> {
+
+            }
+        }
     }
 
 }
