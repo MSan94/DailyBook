@@ -28,6 +28,7 @@
             app:layout_constraintStart_toEndOf="@+id/imageView_Cover"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:layout_margin="10dp"
             android:layout_width="0dp"
@@ -45,6 +46,7 @@
             <TextView
                 android:id="@+id/reading_Text"
                 android:text="Reading Y/N"
+                android:textColor="@color/black"
                 android:paddingLeft="5dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -53,6 +55,7 @@
                 android:layout_height="wrap_content"/>
 
             <CheckBox
+                android:id="@+id/checkBox_Read"
                 app:layout_constraintStart_toEndOf="@+id/reading_Text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

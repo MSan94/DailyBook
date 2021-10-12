@@ -136,7 +136,7 @@ class HomeFragment : Fragment() , HomeContract.View{
             closeListener.onCloseMenu()
         }
         binding.imgBtnMenu2.setOnClickListener {
-//            closeListener.goActivity("2")
+            closeListener.goActivity("2")
             closeListener.onCloseMenu()
         }
         binding.imgBtnMenu3.setOnClickListener {

@@ -53,7 +53,7 @@ class BookPresenter : BookContract.Presenter {
     }
 
     override fun saveBook(context: Context, model: Book) {
-        val bucket = Bucket(model.itemId, model.title, model.author, model.coverSmallUrl,"1")
+        val bucket = Bucket(model.itemId, model.title, model.author, model.coverSmallUrl,"book")
         roomObject = RoomObject.getInstance(context)
         thread(start = true) {
             var result = roomObject?.bucketDao()?.validItem(model.itemId)

@@ -158,6 +158,10 @@ class MainActivity : AppCompatActivity(), MainContract.View,
     /** 액티비티 전환 **/
     override fun goActivity(type: String) {
         when (type) {
+            "2" -> {
+                val intent = Intent(this, BookActivity::class.java)
+                startActivity(intent)
+            }
             "3" -> {
                 val intent = Intent(this, BucketActivity::class.java)
                 startActivity(intent)

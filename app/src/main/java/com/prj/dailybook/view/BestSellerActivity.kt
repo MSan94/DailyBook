@@ -51,7 +51,7 @@ class BestSellerActivity() : AppCompatActivity(), BestSellerContract.View, BookI
 
     /** 찜목록 추가 결과 **/
     override fun setBucketBook(type : String) {
-        val handler = Handler(Looper.getMainLooper());
+        val handler = Handler(Looper.getMainLooper())
         when(type){
             "1" -> {
                 handler.postDelayed(Runnable {

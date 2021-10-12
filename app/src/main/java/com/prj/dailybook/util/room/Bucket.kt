@@ -11,5 +11,6 @@ data class Bucket(
     @ColumnInfo val title: String,
     @ColumnInfo val author: String?,
     @ColumnInfo val coverSmallUrl: String?,
-    @ColumnInfo val type : String
+    @ColumnInfo val type : String,
+    @ColumnInfo val readYn : String = "0"
 )
