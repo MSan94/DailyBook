@@ -73,5 +73,7 @@ dependencies {
     kapt "android.arch.lifecycle:compiler:$room_version"
     kapt "android.arch.persistence.room:compiler:$room_version"
 
+    //캘린더
+    implementation 'com.github.prolificinteractive:material-calendarview:2.0.1'
 
 }
