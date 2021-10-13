@@ -1,7 +1,5 @@
 package com.prj.dailybook.util.model
 
-import androidx.room.ColumnInfo
-import androidx.room.PrimaryKey
 
 data class Bucket(
     val itemId: Long,
