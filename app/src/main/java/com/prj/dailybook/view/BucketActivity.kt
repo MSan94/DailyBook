@@ -7,6 +7,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.prj.dailybook.R
 import com.prj.dailybook.contract.BucketContract
 import com.prj.dailybook.databinding.ActivityBucketBinding
 import com.prj.dailybook.presenter.BookPresenter

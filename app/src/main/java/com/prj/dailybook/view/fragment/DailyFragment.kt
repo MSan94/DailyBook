@@ -33,6 +33,8 @@ class DailyFragment : Fragment() , DailyContract.View{
         binding.dailyCalendar.addDecorator(Sunday())
         binding.dailyCalendar.addDecorator(Saturday())
         binding.dailyCalendar.addDecorator(Today())
+        binding.dailyCalendar.setHeaderTextAppearance(R.style.TextAppearance_MaterialCalendarWidget_Date)
+        binding.dailyCalendar.setWeekDayTextAppearance(R.style.TextAppearance_MaterialCalendarWidget_Date)
 
         binding.btnAddSchedule.setOnClickListener {
             val dialog = ScheduleDialogFragment()
