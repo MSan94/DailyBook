@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="popup_width">1000px</dimen>
-    <dimen name="popup_height">2200px</dimen>
+    <dimen name="popup_width">350dp</dimen>
+    <dimen name="popup_height">800dp</dimen>
+
+    <dimen name="schedule_width">300dp</dimen>
+    <dimen name="schedule_height">300dp</dimen>
    <!-- <dimen name="popup_width">650px</dimen>
     <dimen name="popup_height">1000px</dimen>-->
 </resources>

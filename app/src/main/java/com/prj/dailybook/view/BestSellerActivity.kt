@@ -8,6 +8,7 @@ import android.os.Looper
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.prj.dailybook.R
 import com.prj.dailybook.contract.BestSellerContract
 import com.prj.dailybook.databinding.ActivityBestsellerBinding
 import com.prj.dailybook.presenter.BestSellerPresenter

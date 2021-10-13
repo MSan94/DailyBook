@@ -1,5 +1,7 @@
 package com.prj.dailybook.view.fragment
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.text.style.ForegroundColorSpan
@@ -10,9 +12,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.prj.dailybook.contract.DailyContract
 import com.prj.dailybook.databinding.FragmentDailyBinding
-import com.prolificinteractive.materialcalendarview.CalendarDay
-import com.prolificinteractive.materialcalendarview.DayViewDecorator
-import com.prolificinteractive.materialcalendarview.DayViewFacade
+import com.prj.dailybook.util.calendar.Saturday
+import com.prj.dailybook.util.calendar.Sunday
+import com.prj.dailybook.util.calendar.Today
+import com.prj.dailybook.view.dialog.ScheduleDialogFragment
+import com.prolificinteractive.materialcalendarview.*
 import java.util.*
 
 class DailyFragment : Fragment() , DailyContract.View{
@@ -26,20 +30,25 @@ class DailyFragment : Fragment() , DailyContract.View{
     override fun init() {
 
         binding.dailyCalendar.selectedDate = CalendarDay.today()
-//        binding.dailyCalendar.addDecorator()
+        binding.dailyCalendar.addDecorator(Sunday())
+        binding.dailyCalendar.addDecorator(Saturday())
+        binding.dailyCalendar.addDecorator(Today())
+
+        binding.btnAddSchedule.setOnClickListener {
+            val dialog = ScheduleDialogFragment()
+            dialog.setButtonClickListener(object : ScheduleDialogFragment.OnButtonListener{
+                    override fun saveSchedule(schedule: String) {
+                        var year = binding.dailyCalendar.selectedDate.year
+                        var month = binding.dailyCalendar.selectedDate.month+1
+                        var day = binding.dailyCalendar.selectedDate.day
+                        var sb : StringBuilder = java.lang.StringBuilder().append(year).append("-").append(month).append("-").append(day)
+                        Toast.makeText(activity,"$sb",Toast.LENGTH_SHORT).show()
+                    }
+                })
+            dialog.show(parentFragmentManager,"ScheduleDialog")
+        }
     }
 
-//    inner class SundayDecorator: DayViewDecorator {
-//        private val calendar = Calendar.getInstance()
-//        override fun shouldDecorate(day: CalendarDay?): Boolean {
-//            day?.copyTo(calendar)
-//            val weekDay = calendar.get(Calendar.DAY_OF_WEEK)
-//            return weekDay == Calendar.SUNDAY
-//        }
-//        override fun decorate(view: DayViewFacade?) {
-//            view?.addSpan(object: ForegroundColorSpan(Color.RED){})
-//        }
-//    }
 }
 
 
