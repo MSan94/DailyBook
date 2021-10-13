@@ -79,7 +79,7 @@
 
 
             <TextView
-                android:id="@+id/textView_Jjim"
+                android:id="@+id/textView_del"
                 android:text="삭제"
                 android:gravity="center"
                 android:textColor="@color/font_color_a"

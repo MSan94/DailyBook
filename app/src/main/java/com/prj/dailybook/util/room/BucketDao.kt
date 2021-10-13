@@ -30,6 +30,9 @@ interface BucketDao {
     @Delete
     fun deleteBook(book : Bucket)
 
+    @Query("DELETE FROM bucket WHERE itemId =:itemId")
+    fun selectDelBook(itemId : Long)
+
     @Delete
     fun deleteMusic(music : Bucket)
 

@@ -10,11 +10,13 @@ import com.bumptech.glide.Glide
 import com.prj.dailybook.contract.BucketAdapterContract
 import com.prj.dailybook.databinding.ItemBookBinding
 import com.prj.dailybook.databinding.ItemBucketBinding
+import com.prj.dailybook.util.listener.BookInterface
+import com.prj.dailybook.util.listener.BucketInterface
 import com.prj.dailybook.util.model.Book
 import com.prj.dailybook.util.model.Bucket
 import kotlin.concurrent.thread
 
-class BucketAdapter() : ListAdapter<Bucket, BucketAdapter.BucketItemViewHolder>(diffUtil) , BucketAdapterContract.View, BucketAdapterContract.Model  {
+class BucketAdapter(val listener : BucketInterface) : ListAdapter<Bucket, BucketAdapter.BucketItemViewHolder>(diffUtil) , BucketAdapterContract.View, BucketAdapterContract.Model  {
 
     private var bucketList : ArrayList<com.prj.dailybook.util.room.Bucket> = ArrayList()
 
@@ -27,6 +29,9 @@ class BucketAdapter() : ListAdapter<Bucket, BucketAdapter.BucketItemViewHolder>(
                 .into(binding.imageViewCover)
             binding.checkBoxRead.isChecked = model.readYn == "1"
             binding.textViewTitle.text = model.title
+            binding.textViewDel.setOnClickListener {
+                listener.delBucket(model)
+            }
         }
     }
 

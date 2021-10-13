@@ -24,5 +24,6 @@ interface BucketContract {
         var adapterView : BucketAdapterContract.View
 
         fun getBucketItem(context: Context, type : String)
+        fun delBucketBook(context: Context, bucket : com.prj.dailybook.util.room.Bucket)
     }
 }

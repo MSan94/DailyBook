@@ -13,14 +13,16 @@ import com.prj.dailybook.presenter.BookPresenter
 import com.prj.dailybook.presenter.BucketPresenter
 import com.prj.dailybook.util.adapter.BookAdapter
 import com.prj.dailybook.util.adapter.BucketAdapter
+import com.prj.dailybook.util.listener.BucketInterface
 import com.prj.dailybook.util.model.BookListData
 import com.prj.dailybook.util.model.BucketListData
+import com.prj.dailybook.util.room.Bucket
 
 /**
  * @author 안명성
  */
 
-class BucketActivity : AppCompatActivity(), BucketContract.View {
+class BucketActivity : AppCompatActivity(), BucketContract.View , BucketInterface{
     override lateinit var presenter: BucketContract.Presenter
     private val binding by lazy { ActivityBucketBinding.inflate(layoutInflater) }
     lateinit var adapter: BucketAdapter
@@ -42,7 +44,7 @@ class BucketActivity : AppCompatActivity(), BucketContract.View {
             binding.textViewBucketTitle.text = "음반 저장 리스트"
         }
 
-        adapter = BucketAdapter()
+        adapter = BucketAdapter(this)
 
         binding.bucketRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.bucketRecyclerView.adapter = adapter
@@ -71,13 +73,16 @@ class BucketActivity : AppCompatActivity(), BucketContract.View {
 
     override fun setRecyclerView(type: String, size : Int, checkSize : Int) {
         runOnUiThread(Runnable() {
-            binding.constraintContents.visibility = GONE
-            binding.constraintList.visibility = VISIBLE
-            binding.constraintEmpty.visibility = GONE
             adapter.notifyAdapter()
             when (type) {
                 "1" -> {
-                    var rate : Float = (checkSize / size).toFloat()
+                    var rate: Float = 0.0f
+                    if(size > 0) {
+                        rate = (checkSize / size).toFloat()
+                        binding.constraintContents.visibility = GONE
+                        binding.constraintList.visibility = VISIBLE
+                        binding.constraintEmpty.visibility = GONE
+                    }
                     binding.textViewTitle.text = "찜리스트 - 책 -"
                     binding.textViewRate.text = "진행률 : $rate%"
                 }
@@ -92,11 +97,15 @@ class BucketActivity : AppCompatActivity(), BucketContract.View {
     override fun setEmptyItem() {
         runOnUiThread(Runnable() {
             val handler = Handler(Looper.getMainLooper())
+            binding.constraintEmpty.visibility = VISIBLE
             binding.constraintContents.visibility = GONE
             binding.constraintList.visibility = GONE
-            binding.constraintEmpty.visibility = VISIBLE
             adapter.notifyAdapter()
         })
+    }
+
+    override fun delBucket(bucket: Bucket) {
+        presenter.delBucketBook(this,bucket)
     }
 
 }

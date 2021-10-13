@@ -2,6 +2,7 @@ package com.prj.dailybook.presenter
 
 import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import com.prj.dailybook.contract.BucketAdapterContract
 import com.prj.dailybook.contract.BucketContract
 import com.prj.dailybook.util.model.BucketListData
@@ -25,7 +26,7 @@ class BucketPresenter : BucketContract.Presenter {
                     var checkSize = 0
                     roomObject = RoomObject.getInstance(context)
                     var list = roomObject?.bucketDao()?.selectBucket("book")
-                    if (list != null) {
+                    if (list?.size!! > 0) {
                         for(i in list.indices){
                             if(list[i].readYn == "1"){
                                 checkSize++
@@ -34,12 +35,33 @@ class BucketPresenter : BucketContract.Presenter {
                         view.setRecyclerView("1", list.size,checkSize)
                         adapterModel.addItems(list as ArrayList<Bucket>)
                     } else {
-
+                        view.setEmptyItem()
                     }
                     RoomObject.delInstance()
                     Log.d("ThreadTest", " 끝")
                 }
             }
+        }
+    }
+
+    override fun delBucketBook(context: Context, bucket: Bucket) {
+        thread(start = true){
+            roomObject = RoomObject.getInstance(context)
+            roomObject?.bucketDao()?.selectDelBook(bucket.itemId)
+            var checkSize = 0
+            var list = roomObject?.bucketDao()?.selectBucket("book")
+            if (list != null) {
+                for(i in list.indices){
+                    if(list[i].readYn == "1"){
+                        checkSize++
+                    }
+                }
+                view.setRecyclerView("1", list.size,checkSize)
+                adapterModel.addItems(list as ArrayList<Bucket>)
+            } else {
+                view.setEmptyItem()
+            }
+            RoomObject.delInstance()
         }
     }
 }
