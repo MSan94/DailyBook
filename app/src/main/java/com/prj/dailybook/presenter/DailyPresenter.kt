@@ -24,7 +24,7 @@ class DailyPresenter : DailyContract.Presenter {
 
     override fun insertSchedule(context: Context, schedule : Schedule) {
         thread(start = true){
-            roomObject = RoomObject.getInstance(context)
+            roomObject = RoomObject.getScheduleInstance(context)
             roomObject?.ScheduleDao()?.insertSchedule(schedule)
             var list = roomObject?.ScheduleDao()?.getAll()
             list?.sortedByDescending { it.date }
@@ -40,7 +40,7 @@ class DailyPresenter : DailyContract.Presenter {
 
     override fun getSchedule(context: Context) {
         thread(start = true){
-            roomObject = RoomObject.getInstance(context)
+            roomObject = RoomObject.getScheduleInstance(context)
             var list = roomObject?.ScheduleDao()?.getAll()
 //            var sortedList = list?.sortedBy { it.date }
 //            for(i in 0 until list?.size!!){

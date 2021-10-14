@@ -103,6 +103,10 @@ class HomeFragment : Fragment() , HomeContract.View{
     /** 초기화 **/
     @SuppressLint("ClickableViewAccessibility")
     override fun init() {
+
+        binding.progressbar.max = 100
+        binding.progressbar.progress = 30
+
         mGlideRequestManager = Glide.with(this)
         binding.viewPagerBook.adapter = adapter
         binding.viewPagerBook.orientation = ViewPager2.ORIENTATION_HORIZONTAL

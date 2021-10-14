@@ -96,7 +96,7 @@
                 android:gravity="center"
                 android:background="@color/background_B"
                 android:textColor="@color/font_color_a"
-                app:layout_constraintStart_toEndOf="@+id/textView_Jjim"
+                app:layout_constraintStart_toEndOf="@+id/textView_del"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -8,7 +8,7 @@
     <com.prolificinteractive.materialcalendarview.MaterialCalendarView
         android:id="@+id/daily_Calendar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:mcv_arrowColor="@color/black"
         app:mcv_headerTextAppearance="@color/black"
         android:orientation="horizontal"

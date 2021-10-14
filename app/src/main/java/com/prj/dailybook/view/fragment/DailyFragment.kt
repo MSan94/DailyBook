@@ -3,6 +3,7 @@ package com.prj.dailybook.view.fragment
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -15,6 +16,7 @@ import com.prj.dailybook.contract.DailyContract
 import com.prj.dailybook.databinding.FragmentDailyBinding
 import com.prj.dailybook.presenter.DailyPresenter
 import com.prj.dailybook.util.adapter.ScheduleAdapter
+import com.prj.dailybook.util.calendar.Dot
 import com.prj.dailybook.util.calendar.Saturday
 import com.prj.dailybook.util.calendar.Sunday
 import com.prj.dailybook.util.calendar.Today
@@ -36,6 +38,10 @@ class DailyFragment : Fragment() , DailyContract.View{
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+    }
+
     override fun init() {
         binding.ScheduleRecyclerView.layoutManager = LinearLayoutManager(activity)
         binding.ScheduleRecyclerView.adapter = adapter
@@ -54,6 +60,11 @@ class DailyFragment : Fragment() , DailyContract.View{
         binding.dailyCalendar.addDecorator(Today())
         binding.dailyCalendar.setHeaderTextAppearance(R.style.TextAppearance_MaterialCalendarWidget_Date)
         binding.dailyCalendar.setWeekDayTextAppearance(R.style.TextAppearance_MaterialCalendarWidget_Date)
+        binding.dailyCalendar.state().edit()
+            .isCacheCalendarPositionEnabled(false)
+            .commit()
+
+
 
         binding.btnAddSchedule.setOnClickListener {
             if(binding.dailyCalendar.selectedDate == null){
