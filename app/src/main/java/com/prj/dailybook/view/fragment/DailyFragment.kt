@@ -1,5 +1,6 @@
 package com.prj.dailybook.view.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -22,16 +23,24 @@ import com.prj.dailybook.util.calendar.Sunday
 import com.prj.dailybook.util.calendar.Today
 import com.prj.dailybook.util.model.ScheduleListData
 import com.prj.dailybook.util.room.Schedule
+import com.prj.dailybook.view.MainActivity
 import com.prj.dailybook.view.dialog.ScheduleDialogFragment
 import com.prolificinteractive.materialcalendarview.*
 import java.util.*
+import kotlin.concurrent.thread
 
 class DailyFragment : Fragment() , DailyContract.View{
     override lateinit var presenter: DailyContract.Presenter
     private val binding by lazy { FragmentDailyBinding.inflate(layoutInflater) }
 
+    var activity : MainActivity? = null
     val adapter = ScheduleAdapter()
     private val dialog = ScheduleDialogFragment()
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        activity = getActivity() as MainActivity
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         init()
@@ -46,6 +55,14 @@ class DailyFragment : Fragment() , DailyContract.View{
         binding.ScheduleRecyclerView.layoutManager = LinearLayoutManager(activity)
         binding.ScheduleRecyclerView.adapter = adapter
         binding.ScheduleRecyclerView.scrollToPosition(0)
+
+        adapter.setListener(object : ScheduleAdapter.ScheduleInterface{
+            override fun updateSchedule(Yn:String, Id:Int) {
+                activity?.let { presenter.updateYn(it,Yn,Id) }
+            }
+
+        })
+
         presenter = DailyPresenter().apply {
             view = this@DailyFragment
             adapterView = adapter
@@ -109,6 +126,11 @@ class DailyFragment : Fragment() , DailyContract.View{
             binding.ScheduleRecyclerView.visibility = VISIBLE
             binding.textViewEmpty.visibility = GONE
         },0)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        activity = null
     }
 
 }

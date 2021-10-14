@@ -36,7 +36,7 @@ class BucketActivity : AppCompatActivity(), BucketContract.View , BucketInterfac
 
     /** 초기화 **/
     override fun init() {
-        binding.btnBucket.setOnClickListener {
+        binding.btnBook.setOnClickListener {
             trasferList("1")
             binding.textViewBucketTitle.text = "책 저장 리스트"
         }
@@ -107,6 +107,10 @@ class BucketActivity : AppCompatActivity(), BucketContract.View , BucketInterfac
 
     override fun delBucket(bucket: Bucket) {
         presenter.delBucketBook(this,bucket)
+    }
+
+    override fun updateBucket(readYn: String, itemId: Long, type: String) {
+        presenter.updateBucket(this,readYn,itemId,type)
     }
 
 }

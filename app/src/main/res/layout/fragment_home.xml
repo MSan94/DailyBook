@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/background_color">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/homeLayout"
@@ -24,10 +24,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:fontFamily="@font/nanumsquareroundeb"
-            android:gravity="center"
-            android:textColor="@color/font_color_d"
-            android:textSize="24sp"
+            android:fontFamily="@font/binggrae"
+            android:gravity="center|left"
+            android:textColor="#8B008B"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:text="DailyBook"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -57,4 +57,13 @@ class DailyPresenter : DailyContract.Presenter {
         }
     }
 
+    override fun updateYn(context: Context, Yn: String, Id: Int) {
+        thread(start = true){
+            roomObject = RoomObject.getScheduleInstance(context)
+            var changeYn = if(Yn == "N") "Y" else "N"
+            roomObject?.ScheduleDao()?.updateYn(changeYn,Id)
+            RoomObject.delSchInstance()
+        }
+    }
+
 }

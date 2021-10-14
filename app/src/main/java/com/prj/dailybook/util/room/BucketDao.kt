@@ -36,6 +36,9 @@ interface BucketDao {
     @Delete
     fun deleteMusic(music : Bucket)
 
+    @Query("UPDATE bucket SET readYn =:readYn WHERE itemId =:itemId AND type =:type")
+    fun updateBucket(readYn : String, itemId: Long, type: String)
+
 
 
 }

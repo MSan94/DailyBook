@@ -29,6 +29,7 @@
 
     <CheckBox
         android:id="@+id/checkbox_Yn"
+        android:button="@drawable/checkbox"
         app:layout_constraintStart_toEndOf="@+id/textView_Contents"
         app:layout_constraintEnd_toStartOf="@+id/textView_Del"
         app:layout_constraintTop_toBottomOf="@+id/textView_Date"
@@ -55,7 +56,7 @@
         android:background="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkbox_Yn"
+        app:layout_constraintTop_toBottomOf="@+id/textView_Contents"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

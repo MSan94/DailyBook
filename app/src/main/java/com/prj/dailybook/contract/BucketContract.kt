@@ -25,5 +25,6 @@ interface BucketContract {
 
         fun getBucketItem(context: Context, type : String)
         fun delBucketBook(context: Context, bucket : com.prj.dailybook.util.room.Bucket)
+        fun updateBucket(context: Context, readYn : String, itemId: Long, type: String)
     }
 }

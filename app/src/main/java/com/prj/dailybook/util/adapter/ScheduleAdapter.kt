@@ -1,5 +1,6 @@
 package com.prj.dailybook.util.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -7,18 +8,29 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.prj.dailybook.contract.ScheduleAdapterContract
 import com.prj.dailybook.databinding.ItemScheduleBinding
-import com.prj.dailybook.util.listener.ScheduleInterface
 import com.prj.dailybook.util.model.Schedule
 
 class ScheduleAdapter() : ListAdapter<Schedule, ScheduleAdapter.ScheduleItemViewHolder>(diffUtil) , ScheduleAdapterContract.View, ScheduleAdapterContract.Model  {
 
+    interface ScheduleInterface {
+        fun updateSchedule(Yn:String, Id:Int)
+    }
+    private lateinit var listener : ScheduleInterface
     private var scheduleList : ArrayList<com.prj.dailybook.util.room.Schedule> = ArrayList()
+
+    fun setListener(listener : ScheduleInterface){
+        this.listener = listener
+    }
 
     inner class ScheduleItemViewHolder(private val binding : ItemScheduleBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(model : com.prj.dailybook.util.room.Schedule){
             binding.textViewDate.text = model.date
             binding.textViewContents.text = model.contents
             binding.checkboxYn.isChecked = model.Yn != "N"
+
+            binding.checkboxYn.setOnCheckedChangeListener { buttonView, isChecked ->
+                listener.updateSchedule(model.Yn, model.Id)
+            }
         }
     }
 

@@ -12,98 +12,117 @@
 
         <TextView
             android:id="@+id/textView_Title"
-            android:text="장바구니 항목 선택"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:fontFamily="@font/nanumsquareroundeb"
             android:gravity="center"
+            android:text="장바구니 항목 선택"
             android:textColor="@color/black"
             android:textSize="18dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="150dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btn_Book"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/btn_bucket"
-            android:layout_margin="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_bucket"
-            android:text="책"
+        <ImageButton
+            android:id="@+id/btn_Book"
             android:layout_width="0dp"
-            android:layout_height="300dp"
+            android:layout_height="150dp"
+            android:background="@color/white"
+            android:src="@drawable/bookbtn"
             android:layout_margin="20dp"
-            android:textColor="@color/black"
-            android:background="@drawable/choice_bucket_custom"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_music"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:text="책"
+            android:textColor="@color/black"
+            android:fontFamily="@font/binggrae"
+            app:layout_constraintStart_toStartOf="@+id/btn_Book"
+            app:layout_constraintEnd_toEndOf="@id/btn_Book"
+            app:layout_constraintTop_toBottomOf="@+id/btn_Book"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <ImageButton
             android:id="@+id/btn_music"
-            android:text="음반"
             android:layout_width="0dp"
-            android:background="@drawable/choice_bucket_custom"
-            android:layout_height="300dp"
+            android:layout_height="150dp"
             android:layout_margin="20dp"
+            android:background="@color/white"
+            android:src="@drawable/musicbtn"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btn_bucket"
+            app:layout_constraintStart_toEndOf="@+id/btn_Book"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:text="음반"
+            android:textColor="@color/black"
+            android:fontFamily="@font/binggrae"
+            app:layout_constraintStart_toStartOf="@+id/btn_music"
+            app:layout_constraintEnd_toEndOf="@id/btn_music"
+            app:layout_constraintTop_toBottomOf="@+id/btn_music"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_List"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <TextView
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/textView_bucket_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:fontFamily="@font/nanumsquareroundeb"
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="20dp"
-            android:layout_margin="10dp"
-            android:id="@+id/textView_bucket_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView_rate"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_bucket_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="@color/black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_bucket_title" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/bucketRecyclerView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_rate"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="0dp"/>
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_rate" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_Empty"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <TextView
-            android:text="저장정보가 없습니다."
-            android:textColor="@color/black"
-            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="저장정보가 없습니다."
+            android:textColor="@color/black" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

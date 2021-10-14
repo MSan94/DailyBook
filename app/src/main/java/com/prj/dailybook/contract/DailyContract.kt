@@ -22,5 +22,6 @@ interface DailyContract {
         var adapterView : ScheduleAdapterContract.View
         fun insertSchedule(context: Context,schedule : Schedule)
         fun getSchedule(context: Context)
+        fun updateYn(context:Context , Yn : String, Id : Int)
     }
 }

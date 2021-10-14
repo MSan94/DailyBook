@@ -64,4 +64,14 @@ class BucketPresenter : BucketContract.Presenter {
             RoomObject.delInstance()
         }
     }
+
+    override fun updateBucket(context: Context, readYn: String, itemId: Long, type: String) {
+        Log.d("TestThread", "실행")
+        thread(start = true){
+            var changeYn = if(readYn == "1") "0" else "1"
+            roomObject = RoomObject.getInstance(context)
+            roomObject?.bucketDao()?.updateBucket(changeYn,itemId,type)
+            RoomObject.delInstance()
+        }
+    }
 }

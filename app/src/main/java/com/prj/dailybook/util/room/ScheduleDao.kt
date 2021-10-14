@@ -13,6 +13,8 @@ interface ScheduleDao {
     @Insert
     fun insertSchedule(schedule : Schedule)
 
+    @Query("UPDATE schedule SET Yn =:Yn WHERE id =:id")
+    fun updateYn(Yn : String , id : Int)
 
 
 }

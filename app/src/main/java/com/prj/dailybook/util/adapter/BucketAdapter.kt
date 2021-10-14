@@ -32,6 +32,10 @@ class BucketAdapter(val listener : BucketInterface) : ListAdapter<Bucket, Bucket
             binding.textViewDel.setOnClickListener {
                 listener.delBucket(model)
             }
+
+            binding.checkBoxRead.setOnCheckedChangeListener { buttonView, isChecked ->
+                listener.updateBucket(model.readYn,model.itemId,model.type)
+            }
         }
     }
 

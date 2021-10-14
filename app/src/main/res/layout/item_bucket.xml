@@ -56,12 +56,13 @@
 
             <CheckBox
                 android:id="@+id/checkBox_Read"
+                android:button="@drawable/checkbox"
                 app:layout_constraintStart_toEndOf="@+id/reading_Text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
+                android:layout_width="20dp"
+                android:layout_height="20dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
