@@ -16,5 +16,10 @@ interface ScheduleDao {
     @Query("UPDATE schedule SET Yn =:Yn WHERE id =:id")
     fun updateYn(Yn : String , id : Int)
 
+    @Query("SELECT count(*) FROM schedule")
+    fun getCountSchedule() : Int
+
+    @Query("SELECT count(*) FROM schedule WHERE Yn = 'Y'")
+    fun getCountYnSchedule() : Int
 
 }

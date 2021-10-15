@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
@@ -24,6 +26,7 @@ import com.prj.dailybook.util.adapter.ViewPagerAdapter
 import com.prj.dailybook.util.model.Book
 import com.prj.dailybook.util.model.BookListData
 import com.prj.dailybook.util.model.Music
+import java.lang.Math.round
 
 /**
  * @author 안명성
@@ -104,9 +107,6 @@ class HomeFragment : Fragment() , HomeContract.View{
     @SuppressLint("ClickableViewAccessibility")
     override fun init() {
 
-        binding.progressbar.max = 100
-        binding.progressbar.progress = 30
-
         mGlideRequestManager = Glide.with(this)
         binding.viewPagerBook.adapter = adapter
         binding.viewPagerBook.orientation = ViewPager2.ORIENTATION_HORIZONTAL
@@ -122,6 +122,7 @@ class HomeFragment : Fragment() , HomeContract.View{
         presenter.getMusic()
         presenter.getForeBook()
         presenter.getHealthBook()
+        context?.let { presenter.getBookRatio(it) }
 
         binding.homeLayout.setOnClickListener {
             closeListener.onCloseMenu()
@@ -212,6 +213,19 @@ class HomeFragment : Fragment() , HomeContract.View{
         )
         sb.setSpan(RelativeSizeSpan(1.3f), start, end, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding.textViewTopTitle.text = sb
+    }
+
+    /** 프로그래스 설정 **/
+    override fun reFreshRate(totalCount: Int, yCount: Int) {
+        val handler = Handler(Looper.getMainLooper())
+        val rate = ((yCount.toFloat() / totalCount.toFloat())*100)
+        handler.postDelayed(Runnable {
+            binding.textViewCnt.text = "$totalCount / $yCount"
+            binding.textViewRate.text = "${round(rate)}%"
+
+            binding.progressbar.max = 100
+            binding.progressbar.progress = round(rate)
+        },0)
     }
 
     override fun onDestroy() {

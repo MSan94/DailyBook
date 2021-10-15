@@ -6,9 +6,11 @@ import com.prj.dailybook.contract.*
 import com.prj.dailybook.util.PropertiesData
 import com.prj.dailybook.util.model.*
 import com.prj.dailybook.util.retrofit.RetrofitObject
+import com.prj.dailybook.util.room.RoomObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.concurrent.thread
 
 class HomePresenter : HomeContract.Presenter {
 
@@ -19,6 +21,8 @@ class HomePresenter : HomeContract.Presenter {
     lateinit var music : List<Music>
     lateinit var foreBook : Book
     lateinit var healthBook : Book
+
+    private var roomObject : RoomObject? = null
 
     override fun getData(context: Context, isClear: Boolean) {
         val responseService = RetrofitObject.apiService.getBestSellerBooks(PropertiesData.SERVICE_KEY)
@@ -102,6 +106,18 @@ class HomePresenter : HomeContract.Presenter {
                 }
 
             })
+    }
+
+    override fun getBookRatio(context : Context) {
+        thread(start = true){
+            roomObject = RoomObject.getScheduleInstance(context)
+            var totalCount = roomObject?.ScheduleDao()?.getCountSchedule()
+            var yCount = roomObject?.ScheduleDao()?.getCountYnSchedule()
+            if (totalCount == null) totalCount = 0
+            if(yCount == null) yCount = 0
+            view.reFreshRate(totalCount, yCount)
+            RoomObject.delSchInstance()
+        }
     }
 
     companion object{

@@ -16,6 +16,7 @@ interface HomeContract {
         fun setForeBook(foreBook : Book)
         fun setHealthBook(healthBook : Book)
         fun textReSize()
+        fun reFreshRate(totalCount : Int , yCount : Int)
     }
 
     interface Presenter : BasePresenter {
@@ -27,5 +28,6 @@ interface HomeContract {
         fun getMusic()
         fun getForeBook()
         fun getHealthBook()
+        fun getBookRatio(context : Context)
     }
 }

@@ -101,6 +101,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:id="@+id/textView_rate"
                 android:text="70%"
                 android:textSize="12sp"
                 app:layout_constraintTop_toBottomOf="@+id/textView_rate_info"
