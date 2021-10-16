@@ -1,6 +1,7 @@
 package com.prj.dailybook.view.dialog
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +33,7 @@ class ScheduleDialogFragment : DialogFragment() {
         super.onResume()
         val width = resources.getDimensionPixelSize(R.dimen.schedule_width)
         val height = resources.getDimensionPixelSize(R.dimen.schedule_height)
+        binding.editTextSchedule.text = null
         dialog?.window?.setLayout(width,height)
     }
 

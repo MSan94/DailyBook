@@ -22,4 +22,6 @@ interface ScheduleDao {
     @Query("SELECT count(*) FROM schedule WHERE Yn = 'Y'")
     fun getCountYnSchedule() : Int
 
+    @Query("DELETE FROM schedule")
+    fun deleteAll()
 }

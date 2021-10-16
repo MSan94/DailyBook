@@ -23,4 +23,7 @@
     <string name="bestSeller">오늘의 베스트 셀러</string>
     <string name="buy">구매링크</string>
     <string name="jjim">책 저장</string>
+
+    <!-- 환경설정 -->
+    <string name="setting1">저장정보 초기화</string>
 </resources>
