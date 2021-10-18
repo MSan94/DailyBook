@@ -16,7 +16,7 @@
     <!-- 메뉴 -->
     <string name="menu1">베스트셀러</string>
     <string name="menu2">책 검색</string>
-    <string name="menu3">서점 찾기</string>
+    <string name="menu3">음반 추천</string>
     <string name="menu4">앱 종료</string>
 
     <!-- 컨텐츠 -->
